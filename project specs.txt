@@ -7,6 +7,7 @@ To-Do:
 4) Create page for searching for new songs
 5) Create page to sign into Spotify Account
 6) Figure out a way to generate a unique ID (shouldn't be primary key because it would be easy for someone to guess/hack)
+7) Find a better name for app
 
 
 Methods to implement:
