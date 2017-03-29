@@ -1,0 +1,25 @@
+Spotify Party Playlist App
+
+To-Do:
+1) Make necessary changes to index.html (homepage) like the text and the background
+2) Create page for "making a new party"
+3) Create page for "find a party" search results
+4) Create page for searching for new songs
+5) Create page to sign into Spotify Account
+6) Figure out a way to generate a unique ID (shouldn't be primary key because it would be easy for someone to guess/hack)
+
+
+Methods to implement:
+1) Sign into/link with Spotify Account
+2) Search our own database for party using unique code
+3) Search Spotify database for songs
+4) Add songs to playlist
+5) (if we have time) Remove songs from playlist
+
+
+Database Schema:
+id, primary key, auto increment.
+unique ID
+name of Party Master
+party name (maybe?)
+credentials of Party Master's Spotify account?
