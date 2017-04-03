@@ -24,3 +24,6 @@ unique ID
 name of Party Master
 party name (maybe?)
 credentials of Party Master's Spotify account?
+
+a second table to link to first table with foreign key so one user can make multiple parties
+
