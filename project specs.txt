@@ -1,4 +1,5 @@
 Spotify Party Playlist App
+Apollo
 
 To-Do:
 1) Make necessary changes to index.html (homepage) like the text and the background
