@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Apollo Home</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Home</span>
+		<div id="signin">
+			<input type="submit" name="button" value="Sign Out" form="homePageForm" />
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			Welcome ${name}!
+			<form action="ApolloServlet" method="post" id="connectForm">
+				<input type="submit" name="button" value="Connect to your Spotify" />
+			</form>	
+		</div>
+	</div>
+</body>
+</html>

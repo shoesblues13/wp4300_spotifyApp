@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Apollo Sign In</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Sign In</span>
+		<div id="signin">
+			<input type="submit" name="button" value="Sign Up" form="signInForm" />
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			<form action="ApolloServlet" method="post" id="signInForm">
+				<label for="uname">Username: </label>
+				<input type="text" id="accountForm" name="uname" /><br/><br/>
+				<label for="pword">Password: </label>
+				<input type="password" id="accountForm" name="pword" /><br/><br/>
+				<input type="submit" name="button" value="Sign In" />
+			</form>	
+		</div>
+	</div>
+</body>
+</html>
