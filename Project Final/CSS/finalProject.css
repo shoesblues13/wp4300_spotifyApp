@@ -23,6 +23,15 @@ body {
 	line-height: 50px;
 }
 
+#signin {
+	float: right;
+	width: 100px;
+	height: 50px;
+	margin-right: 10px;
+	vertical-align: middle;
+	margin-top: -5px;
+}
+
 #title {
 	vertical-align: middle;
 	margin-left: 10px;
@@ -61,8 +70,8 @@ body {
 	margin: auto;
 }
 
-input[type=text], select {
-	width: 64%;
+input[type=text], input[type=password], select {
+	width: 190px;
 	padding: 12px, 20px;
 	margin: 8px 0;
 	display: inline-block;
@@ -81,3 +90,14 @@ input[type=submit] {
 	border-radius: 5px;
 	border: none;
 }
+
+#accountForm {
+	width: 200px;
+	margin: auto;
+}
+
+#innerDiv {
+	padding: 10px;
+	width: 100%;
+}
+
