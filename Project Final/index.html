@@ -4,16 +4,19 @@
 	<meta charset="UTF-8">
 	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="finalProject.js"></script>
-	<title>Name Home</title>
+	<title>Apollo Home</title>
 </head>
 <body>
 	<div id="topBar" class="homeDivs">
-		<span id="title">The Spotify Party Playlist App</span>
+		<span id="title">Apollo - The Spotify Party Playlist App</span>
+		<div id="signin">
+			<input type="submit" name="button" value="Sign In" form="homePageForm" />
+		</div>
 	</div>
 	<br/>
 	<br/>
 	<div id="searchDiv" class="homeDivs">
-		<form action="SpotifyServlet" method="post" id="homePageForm">
+		<form action="ApolloServlet" method="post" id="homePageForm">
 			Find a party:&emsp;<input type="text" id="search" name="search" placeholder="Enter Party Code"/>
 			<input type="submit" name="button" value="Search" />
 		</form>	
@@ -22,7 +25,7 @@
 	<br/>
 	<div id="intro" class="homeDivs">
 		<img src="./images/music.png" id="musicNote" alt="music note image">
-		<div id="introText"><p>With the Spotify Party Playlist App, the burden is no longer on the party host to pick music for everyone to enjoy at
+		<div id="introText"><p>With Apollo, the burden is no longer on the party host to pick music for everyone to enjoy at
 		parties and hangouts! Let your guests control what they hear!</p>
 		<ol type="1">
 			<li>Party Master creates a new party by signing into Spotify here.</li>
@@ -30,8 +33,8 @@
 			<li>Attendees search here for their party using the code.</li>
 			<li>Start adding songs! The Party Master's Spotify playlist is automatically updated with the added songs.</li>
 		</ol>
-		<p id="center">Start Now!</p>
-		<input type="submit" name="button" value="Create a new party" form="homePageForm" /></div>
+		<p id="center">Create an account and start now!</p>
+		<input type="submit" name="button" value="Sign Up" form="homePageForm" /></div>
 	</div>
 </body>
 </html>
