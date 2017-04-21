@@ -7,6 +7,7 @@ public class User {
 	private String uname;
 	private String pword;
 	private String email;
+
 	
 	
 	public User(String fname, String lname, String email, String username, String password){
@@ -16,7 +17,6 @@ public class User {
 		this.pword = password;
 		this.email = email;
 	}
-
 
 	public String getFname() {
 		return fname;

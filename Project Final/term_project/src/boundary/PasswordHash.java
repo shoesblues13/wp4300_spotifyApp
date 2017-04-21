@@ -14,9 +14,8 @@ import java.security.SecureRandom;
 public class PasswordHash {
 	
 	
-	public static String hashPass(String pass) throws NoSuchAlgorithmException {
+	public static String hashPass(String pass, byte[] salt) throws NoSuchAlgorithmException {
 		String passwordToHash = pass;
-		byte[] salt = getSalt();
 		String securePassword = get_SHA_512_SecurePassword(passwordToHash,salt);
 		return securePassword;
 	}
@@ -39,7 +38,7 @@ public class PasswordHash {
 		return generatedPassword;
 	}
 	
-	private static byte[] getSalt() throws NoSuchAlgorithmException {
+	public static byte[] getSalt() throws NoSuchAlgorithmException {
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		byte[] salt = new byte[16];
 		sr.nextBytes(salt);

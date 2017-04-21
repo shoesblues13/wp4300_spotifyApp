@@ -58,55 +58,36 @@ public class ApolloServlet extends HttpServlet {
 				SimpleHash root = new SimpleHash(db.build());
 				root.put("name", page);
 				if (page != null){
-				if (page.equals("create")) {
-					String fname = request.getParameter("fname");
-					String lname = request.getParameter("lname");
-					String email = request.getParameter("email");
-					String uname = request.getParameter("uname");
-					String hpword = null;
-					try {
-						hpword = PasswordHash.hashPass("pword");
-					} catch (NoSuchAlgorithmException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					int check = -1;
-					if (hpword != null){
-						check = logicImpl.createUser(fname, lname, email, uname, hpword);
-					}
-					if (check != -1){
-						root.put("check", "Yeaaaaaaaaaaah Buddy");
+					if (page.equals("create")) {
+						String fname = request.getParameter("fname");
+						String lname = request.getParameter("lname");
+						String email = request.getParameter("email");
+						String uname = request.getParameter("uname");
+						String pword = request.getParameter("pword");
+						int check = logicImpl.createUser(fname, lname, email, uname, pword);
+				
+						if (check != -1){
+							root.put("check", "doot");
+						
+						}
+						templateName = "test.ftl";
 						
 					}
-					templateName = "test.ftl";
+					else if (page.equals("login")){
+						String uname = request.getParameter("uname");
+						String pword = request.getParameter("pword");
+						int check = logicImpl.signIn(uname, pword);
+						if (check == 1)
+							root.put("check", "success");
+						else
+							root.put("check", "faiiiiiiiil. Pass wasnt the same");
 						
-				}
-				else if (page.equals("login")){
-					String uname = request.getParameter("uname");
-					String hpword = null;
-					try {
-						hpword = PasswordHash.hashPass("pword");
-					} catch (NoSuchAlgorithmException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					int check = -1;
-					if (hpword!=null){
-						check = logicImpl.signIn(uname, hpword);
-					}
-					if (check == -1)
-					{
-						root.put("check", "You failed at guessing your password or the code doesnt work~");
+						templateName="test.ftl";
 					}
 					else {
-						root.put("check", "Check just doesn't equal -1.");
+						root.put("check", "NOOOOOOOOOOO");
 					}
-					templateName="test.ftl";
-					}
-				else {
-					root.put("check", "NOOOOOOOOOOO");
-				}
-				processor.processTemplate(templateName, root, request, response);
+					processor.processTemplate(templateName, root, request, response);
 				}
 				else {
 					

@@ -110,4 +110,35 @@ public class DbAccessImpl {
 			e.printStackTrace();
 		}
 	} // end of closeConnection
+	
+	public static String getPass(String sql, String toget) {
+		Connection c = connect();
+		ResultSet rs = retrieve(sql);
+		String r = null;;
+		try {
+			if (rs.next())
+				r = rs.getString(toget);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect(c);
+		return r;	
+	}
+	
+	public static byte[] getSalt(String sql, String toget) {
+		Connection c = connect();
+		ResultSet rs = retrieve(sql);
+		byte[] r = null;;
+		try {
+			if (rs.next())
+				r = rs.getBytes(toget);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect(c);
+		return r;	
+	}
 }
+
