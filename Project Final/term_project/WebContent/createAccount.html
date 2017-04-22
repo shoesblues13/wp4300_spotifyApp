@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/formvalidate.js"></script>
+	
+	<title>Apollo Sign Up</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Create New Account</span>
+		<form method="get" action="signIn.html">
+		<div id="signin">
+			<input type="submit" name="button" value="Sign In"/>
+		</div>
+		</form>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			<form  method="post" action="ApolloServlet">
+				<label for="fname">First Name: </label>
+				<input class="accountForm" type="text" name="fname" required/><br/><br/>
+				<label for="lname">Last Name: </label>
+				<input class="accountForm" type="text" id="accountForm" name="lname" required/><br/><br/>
+				<label for="email">Email: </label>
+				<input class="accountForm" class="val" type="text" id="email" name="email" required/><br/><br/>
+				<label for="uname">Username: </label>
+				<input class="accountForm" type="text" id="uname" name="uname" required/><br/><br/>
+				<label for="pword">Password: </label>
+				<input class="accountForm" type="password" id="accountForm" name="pword" required/><br/><br/>
+				<input type="submit" name="button" id="validate" value="Create Account" />
+				<input type="hidden" name="page" value="create"/>
+			</form>	
+		</div>
+	</div>
+</body>
+</html>
