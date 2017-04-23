@@ -4,18 +4,74 @@ public class Party {
 	
 	private String name;
 	private String host;
+	private String stime;
 	private String description;
+	private String location;
+	private Boolean pub;
+	
+	private int score;
+	private String key;
+	private String etime;
+	private String status;
+	public Party(String name, String host, String description, String stime, String etime, String location, Boolean pub, int score, String key, String status){
+		this.name = name;
+		this.host = host;
+		this.description = description;
+		this.stime = stime;
+		this.etime = etime;
+		this.location = location;
+		this.pub = pub;
+		this.score = score;
+		this.key= key;
+		this.status = status;
+		
+	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getStime() {
+		return stime;
+	}
+
+	public void setStime(String stime) {
+		this.stime = stime;
+	}
+
+	public String getEtime() {
+		return etime;
+	}
+
+	public void setEtime(String etime) {
+		this.etime = etime;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	private String key;
-	public Party(String name, String host, String description){
-		this.name = name;
-		this.host = host;
-		this.description = description;
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public Boolean getPub() {
+		return pub;
+	}
+	public void setPub(Boolean pub) {
+		this.pub = pub;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 	public String getName() {
 		return name;
