@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="../../CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>View ${partyName}</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">${partyName}</span>
+		<div id="signin">
+			<form method="get" action="index.html">
+				<input type="submit" name="button" value="Sign Out" form="signUpForm" />
+			</form>
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<div id="dashboard" class="homeDivs">
+		<div id="partyInfo">
+			<h2>Description:</h2>
+			<p>${partyDesc}</p>
+			<br/>
+			<h2>Address:</h2>
+			<p>${address}</p>
+			<br/>
+			<p>From ${timeStart} to ${timeEnd}</p>
+		</div>
+
+		<div id="guestList">
+			<div id="homeButtons">
+				<form action="ApolloServlet" method="get" id="guestListEdit">
+					<label for="addGuest">Enter Username:</label>
+					<input type="text" id="guestListEdit" name="newGuest" required/>
+					<input type="submit" name="button" value="Entery Guest" />
+				</form>
+			</div>
+			Guests:<br/><br/>
+			${guestList}
+		</div>
+
+		<div id="toBringList">
+			<div id="homeButtons">
+				<input type="submit" name="button" value="Edit To-Bring List" />
+			</div>	
+			Things to Bring:<br/><br/>
+			${toBringList}
+		</div>
+
+		<div id="musicPlaylist">
+			<div id="homeButtons">
+				<input type="submit" name="button" value="Edit Playlist" />
+			</div>	
+			Music Recommendations:<br/><br/>
+			${musicList}
+		</div>
+		<span class="stretch"></span>
+	</div>
+</body>
+</html>
