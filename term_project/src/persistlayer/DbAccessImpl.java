@@ -114,7 +114,7 @@ public class DbAccessImpl {
 	public static String getString(String sql, String toget) {
 		Connection c = connect();
 		ResultSet rs = retrieve(sql);
-		String r = null;;
+		String r = null;
 		try {
 			if (rs.next())
 				r = rs.getString(toget);
@@ -126,13 +126,13 @@ public class DbAccessImpl {
 		return r;	
 	}
 	
-	public static byte[] getBytes(String sql, String toget) {
+	public static int getInt(String sql, String toget){
 		Connection c = connect();
 		ResultSet rs = retrieve(sql);
-		byte[] r = null;;
+		int r = 0;
 		try {
 			if (rs.next())
-				r = rs.getBytes(toget);
+				r = rs.getInt(toget);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,5 +140,6 @@ public class DbAccessImpl {
 		disconnect(c);
 		return r;	
 	}
+	
 }
 

@@ -1,26 +1,52 @@
 $(function(){
-	$("#email").change(emailValidate());
-	$("#uname").change(unameValidate());
+	$(".email").change(function(){
+		var email = $(".email").val();
+		if(email.includes("@")){
+		$.post("ApolloServlet",
+				{
+				name: "email",
+				page: "validate",
+				value: email
+				}	
+		);
+		}
+		else {
+			alert("Not a valid email");
+		}
+		
+	});
+			
+	
+	
 	
 });
 
 function emailValidate() {
-	var mydata = {"name":"email","value":$("#email").val()};
-	var myJSON = JSON.stringify(obj);
-	$.post("ApolloServlet", {
-		data: mydata,
-		
-	});
+	alert($("#email").val());
+	
+	/* $.post("ApolloServlet",
+			    {
+			        name: "email",
+			        input: $("#email").val(),
+			        page: "validate"
+			    },
+			    function(data, status){
+			        alert("Data: " + data + "\nStatus: " + status);
+			    });
+			    */
 }
 
 function unameValidate() {
-	var mydata = {"name":"uname", "value":$("#uname").val()};
-	$.post("ApolloServlet", {
-		name: "uname",
-		
-	});
+	alert($("#uname").val());
+	//var mydata = {"name":"uname", "value":$("#uname").val()};
+	/*$.post("ApolloServlet", 
+			{
+				name: "uname",
+				input: $("#uname").val(),
+				page: "validate"
+			},
+			function(data, status){
+		        alert("Data: " + data + "\nStatus: " + status);
+		    });*/
 }
 
-function checkResponse(response){
-	
-}
