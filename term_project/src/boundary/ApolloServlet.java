@@ -6,9 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import boundary.TemplateProcessor;
 import freemarker.template.Configuration;
@@ -52,66 +54,99 @@ public class ApolloServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				String page = request.getParameter("page");//get page name
-				String templateName = "index.html";
+				String templateName = "test.ftl";
+				String logout = request.getParameter("logout");
+				String signIn = request.getParameter("signIn");
+				String signUp = request.getParameter("signUp");
 				ApolloLogicImpl logicImpl = new ApolloLogicImpl();
+				HttpSession session = request.getSession(false);
+				String servletName = "apollo";
 				DefaultObjectWrapperBuilder db = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
 				SimpleHash root = new SimpleHash(db.build());
 				root.put("name", page);
-			
-					if (page.equals("create")) {
-						String fname = request.getParameter("fname");
-						String lname = request.getParameter("lname");
-						String email = request.getParameter("email");
-						String uname = request.getParameter("uname");
-						String pword = request.getParameter("pword");
-						String pword2 = request.getParameter("pword2");
-						if(!pword.equals(pword2)){
-							templateName="test.ftl";
-							root.put("check", "pwords arent equal");
+				if(logout !=null){
+					session.invalidate();
+					request.getRequestDispatcher("index.html").include(request, response);
+					
+				}
+				else if (page.equals("index")){
+					if (signIn != null)
+						templateName="signIn.html";
+					else if (signUp !=null)
+						templateName="createAccount.html";
+					
+				}
+				else if (page.equals("success")){
+					templateName="signIn.html";
+				}
+				else if (page.equals("create")) {
+					String fname = request.getParameter("fname");
+					String lname = request.getParameter("lname");
+					String email = request.getParameter("email");
+					String uname = request.getParameter("uname");
+					String pword = request.getParameter("pword");
+					String pword2 = request.getParameter("pword2");
+					if(!pword.equals(pword2)){
+						templateName="test.ftl";
+						root.put("check", "pwords arent equal");
+					}
+					else {
+						int check = logicImpl.createUser(fname, lname, email, uname, pword);
+						if (check != -1){
+							templateName="signupSuccess.html";
 						}
 						else {
-							int check = logicImpl.createUser(fname, lname, email, uname, pword);
-				
-							if (check != -1){
-								templateName="signupSuccess.html";
-							}
-							else {
-								
-								templateName = "../../createAccount.html";
-							}
-						}
-					}
-					else if (page.equals("login")){
-						String uname = request.getParameter("uname");
-						String pword = request.getParameter("pword");
-						int check = logicImpl.signIn(uname, pword);
-						String name = logicImpl.getName(uname);
-						if (check != 0){
-							root.put("name", name);
-							root.put("user", check);
-							templateName="userHome.html";
-						}
-						else{
 							
+							templateName = "../../createAccount.html";
+						}
+						
+					}
+				}
+				else if (page.equals("login")){
+					String uname = request.getParameter("uname");
+					String pword = request.getParameter("pword");
+					int check = logicImpl.signIn(uname, pword);
+					String name = logicImpl.getName(uname);
+					if (check != 0){
+						session=request.getSession();
+						synchronized(session){
+						session.setAttribute("name", name);
+						session.setAttribute("user", check);
+						session.setAttribute("template", "userHome.html");
+						root.put("test",session.getAttribute("user"));
+						}
+						root.put("name", name);
+						root.put("user", check);
+						templateName="userHome.html";
+						
+						
+					}
+					else{
+						templateName="signIn.html";
+					}
+					
+					
+				}
+				else {
+					if(page.equals("userHome")){
+						session = request.getSession();
+						if (session !=null){
+							String button1 = request.getParameter("button1");
+							String button2 = request.getParameter("button2");
+							String button3 = request.getParameter("button3");
+							if (button1 != null){
+								root.put("check", "it works");
+								templateName="test.ftl";
+							}
+							else if (button2 != null){
+								templateName="newParty.html";
+							}
+							else if (button3 != null){
+								templateName="viewParty.html";
+							}
+						}
+						else {
 							templateName="signIn.html";
-						}
-						
-						
-					}
-					else if(page.equals("userHome")){
-						String button1 = request.getParameter("button1");
-						String button2 = request.getParameter("button2");
-						String button3 = request.getParameter("button3");
-						if (button1 != null){
-							root.put("check", "it works");
-							templateName="test.ftl";
-						}
-						else if (button2 != null){
-							templateName="newParty.html";
-							
-						}
-						else if (button3 != null){
-							templateName="viewParty.html";
 						}
 						
 					}
@@ -130,10 +165,12 @@ public class ApolloServlet extends HttpServlet {
 						
 					}
 					else {
-						root.put("check", "NOOOOOOOOOOO");
+						
+						root.put("check", page);
 					}
-					processor.processTemplate(templateName, root, request, response);
 				}
+				processor.processTemplate(templateName, root, request, response);
+			}	
 	}
 
 

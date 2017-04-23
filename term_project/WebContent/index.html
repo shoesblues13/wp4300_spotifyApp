@@ -9,18 +9,21 @@
 <body>
 	<div id="topBar" class="homeDivs">
 		<span id="title">Apollo - The Party App</span>
-		<form method="get" action="signIn.html">
+		
 		<div id="signin">
-			<input type="submit" name="button" value="Sign In"/>
+			<form method="post" action="ApolloServlet">
+			<input type="submit" name="signIn" value="Sign In"/>
+			<input type="hidden" name="page" value="index"/>
+			</form>
 		</div>
-		</form>
+		
 	</div>
 	<br/>
 	<div id="homeMain">
 		<div id="searchDiv" class="homeDivs">
 			<form action="ApolloServlet" method="post" id="homePageForm">
 				Find a party:&emsp;<input type="text" id="search" name="search" placeholder="Enter Party Code"/>
-				<input type="submit" name="button" value="Search" />
+				<input type="submit" name="signUp" value="Search" />
                 <input type="hidden" name="page" value="index"/>
 			</form>	
 		</div>

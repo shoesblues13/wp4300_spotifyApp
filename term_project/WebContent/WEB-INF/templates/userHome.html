@@ -10,9 +10,9 @@
 <body>
 	<div id="topBar" class="homeDivs">
 		<span id="title">Apollo Dashboard</span>
+		
 		<div id="signin">
-			<input type="submit" name="button" value="Sign Out" form="homePageForm" />
-			
+			<input type="submit" name="logout" value="Sign Out" form="homePageForm" />	
 		</div>
 	</div>
 	<br/>
@@ -21,12 +21,13 @@
 		<div id="userDash">
 			<h1>Welcome ${name}!</h1>
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="post" id="">
+				<form action="ApolloServlet" method="post" id="homePageForm">
 					<input type="submit" name="button1" value="View Invites" />
 					<input type="submit" name="button2" value="Host a New Party" />
 					<input type="submit" name="button3" value="Find a Party" />
 					<input type="hidden" name="page" value="userHome"/>
 					<input type="hidden" name="user" value="${user?html}"/>
+					<input type="hidden" name="test" value="${test?html}"/>
 				</form>	
 			</div>
 		</div>

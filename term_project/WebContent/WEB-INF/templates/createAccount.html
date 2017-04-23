@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="scripts/formvalidate.js"></script>
+	<title>Apollo Sign Up</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Create New Account</span>
+		<form method="get" action="signIn.html">
+		  <div id="signin">
+			 <input type="submit" name="button" value="Sign In"/>
+		  </div>
+		</form>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			<form action="ApolloServlet" method="post" id="signUpForm">
+				<label for="fname">First Name: </label>
+				<input type="text" id="accountForm" name="fname" required/><br/><br/>
+				<label for="lname">Last Name: </label>
+				<input type="text" id="accountForm" name="lname" required/><br/><br/>
+				<label for="email">Email: </label>
+				<input class="email" type="text" id="accountForm" name="email" required/><br/><br/>
+				<label for="uname">Username: </label>
+				<input class="uname" type="text" id="accountForm" name="uname" required/><br/><br/>
+				<label for="pword">Password: </label>
+				<input type="password" id="accountForm" name="pword" required/><br/><br/>
+				<label for="pword">Retype Password: </label>
+				<input type="password" id="accountForm" name="pword2" required/><br/><br/>
+				<input type="submit" name="button" value="Create Account" />
+                <input type="hidden" name="page" value="create"/>
+			</form>	
+		</div>
+	</div>
+</body>
+</html>
