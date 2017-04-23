@@ -24,6 +24,11 @@ public class ApolloLogicImpl {
 		return apolloPersist.getName(uname);
 	}
 	
+	public int createParty(String name, String host, String stime, String etime,String description, String location, Boolean pub, int score, String key, String status ) {
+		Party p = new Party(name,host,stime,etime,description,location,pub,score,key,status);
+		return apolloPersist.addParty(p);
+	}
+	
 	
 	
 }
