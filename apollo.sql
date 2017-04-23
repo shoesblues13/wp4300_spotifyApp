@@ -106,11 +106,10 @@ DROP TABLE IF EXISTS `party`;
 CREATE TABLE `party` (
   `party_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `time` varchar(45) NOT NULL,
+  `stime` varchar(45) NOT NULL,
+  `etime` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
   `location` varchar(45) NOT NULL,
-  `bringlist_id` int(11) NOT NULL,
-  `guestlist_id` int(11) NOT NULL,
   `public` tinyint(1) NOT NULL,
   `score` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -145,7 +144,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,6 +153,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('doot','doot','doot@gmail.com','doot','doot',17),('test','two','testtwo@gmail.com','test','doot',18);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-23 11:32:58
+-- Dump completed on 2017-04-23 14:41:51
