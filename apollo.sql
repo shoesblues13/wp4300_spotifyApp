@@ -97,6 +97,35 @@ LOCK TABLES `music` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `partiesattending`
+--
+
+DROP TABLE IF EXISTS `partiesattending`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `partiesattending` (
+  `invited_id` int(11) NOT NULL AUTO_INCREMENT,
+  `party_id` int(11) NOT NULL,
+  `guest_id` int(11) NOT NULL,
+  `going` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`invited_id`),
+  KEY `invited_party_id_idx` (`party_id`),
+  KEY `invited_guest_id_idx` (`guest_id`),
+  CONSTRAINT `invited_guest_id` FOREIGN KEY (`guest_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `invited_party_id` FOREIGN KEY (`party_id`) REFERENCES `party` (`party_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `partiesattending`
+--
+
+LOCK TABLES `partiesattending` WRITE;
+/*!40000 ALTER TABLE `partiesattending` DISABLE KEYS */;
+/*!40000 ALTER TABLE `partiesattending` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `party`
 --
 
@@ -111,13 +140,13 @@ CREATE TABLE `party` (
   `description` varchar(45) NOT NULL,
   `location` varchar(45) NOT NULL,
   `public` tinyint(1) NOT NULL,
-  `score` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `status` varchar(45) NOT NULL,
+  `score` int(11) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`party_id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +173,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +182,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('doot','doot','doot@gmail.com','doot','doot',17),('test','two','testtwo@gmail.com','test','doot',18);
+INSERT INTO `users` VALUES ('Ryan','Kennedy','rpk72167@uga.edu','dryv','test',19);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-23 14:41:51
+-- Dump completed on 2017-04-24 15:34:42
