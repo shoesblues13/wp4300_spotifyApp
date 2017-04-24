@@ -31,16 +31,16 @@ public class ApolloLogicImpl {
 		return apolloPersist.addParty(p);
 	}
 	
-	public SimpleSequence getParties(String uname, DefaultObjectWrapperBuilder db){
+	public SimpleSequence getParties(int uname, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getParties(uname, db);
 	}
 	
-	public SimpleSequence getUserInvited(String uname, DefaultObjectWrapperBuilder db){
+	public SimpleSequence getUserInvited(int uname, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getParties(uname, db);
 	}
 	
-	public int getParty(int party_id){
-		return apolloPersist.getParty(party_id);
+	public SimpleSequence getParty(int party_id, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getParty(party_id,db);
 	}
 	
 	

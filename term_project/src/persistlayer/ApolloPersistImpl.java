@@ -47,20 +47,20 @@ public class ApolloPersistImpl {
 		return party_id;
 	}
 	
-	public SimpleSequence getParties(String uname, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
+	public SimpleSequence getParties(int uname, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT name FROM party WHERE user_id =\""+uname+"\";";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
-	public SimpleSequence getUserInvited(String uname, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
+	public SimpleSequence getUserInvited(int uname, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT name FROM party WHERE user_id =\""+uname+"\";";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
-	public int getParty(int party_id){
-		Party p;
+	public SimpleSequence getParty(int party_id, DefaultObjectWrapperBuilder db){
+		
 		String sql = "SELECT * FROM party where party_id =\"" + party_id +"\";";;
-		return -1;
+		return DbAccessImpl.getSequence(sql, db);
 	}
 	
 }

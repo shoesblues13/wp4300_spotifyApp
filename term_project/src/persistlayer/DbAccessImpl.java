@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleSequence;
+import objectlayer.Party;
 import persistlayer.DbAccessConfiguration;
 
 public class DbAccessImpl {
@@ -159,6 +160,8 @@ public class DbAccessImpl {
 		return sq;
 		
 	}
+	
+	
 	
 }
 

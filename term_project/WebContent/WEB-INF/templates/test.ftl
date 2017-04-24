@@ -9,8 +9,10 @@
 
 		<div class="error">
 		<br>
-			<p>Name is: ${name}</p>
-			<p>${check}</p>
+			<table border=1>
+<#list partyDesc as partyDesc>
+<tr><td>${partyDesc}
+</#list>
 			
 		</div>
 	</body>

@@ -13,6 +13,10 @@ public class Party {
 	private String key;
 	private String etime;
 	private String status;
+	
+	public Party(){
+		
+	}
 	public Party(String name, String stime, String etime,String description, String location, Boolean pub, int hostId){
 		this.name = name;
 		this.host = hostId;

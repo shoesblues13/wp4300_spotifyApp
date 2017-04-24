@@ -17,6 +17,7 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
 import freemarker.template.SimpleSequence;
+import freemarker.template.TemplateModelException;
 import logiclayer.ApolloLogicImpl;
 
 /**
@@ -116,10 +117,11 @@ public class ApolloServlet extends HttpServlet {
 						session.setAttribute("template", "userHome.html");
 						root.put("test",session.getAttribute("user"));
 						}
-						/*
-						SimpleSequence partiesSeq = logicImpl.getParties(uname, db);
-						SimpleSequence userSeq = logicImpl.getUserInvited(uname, db);
-						*/
+						
+						SimpleSequence partiesSeq = logicImpl.getParties(check, db);
+						SimpleSequence userSeq = logicImpl.getUserInvited(check, db);
+						root.put("partiesSeq", partiesSeq);
+						
 						root.put("name", name);
 						root.put("user", check);
 						templateName="userHome.html";
@@ -177,12 +179,16 @@ public class ApolloServlet extends HttpServlet {
 							synchronized(session){
 								session.setAttribute("party_id", party_id);
 							}
-							root.put("partyName", name);
-							root.put("partyDesc", desc);
-							root.put("address", address);
-							root.put("timeStart", timeStart);
-							root.put("timeEnd", timeEnd);
-							templateName="viewParty.html";
+							SimpleSequence sq = logicImpl.getParty(party_id, db);
+							root.put("partyName", party_id);
+							root.put("partyDesc", sq);
+							/*root.put("partyName", sq.get(2));
+							root.put("partyDesc", sq.get(5));
+							root.put("address", sq.get(6));
+							root.put("timeStart", sq.get(3));
+							root.put("timeEnd", sq.get(4));*/
+							
+							templateName="test.ftl";
 						}
 						else {
 							templateName="test.ftl";
