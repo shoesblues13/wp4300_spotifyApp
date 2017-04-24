@@ -39,6 +39,9 @@ public class ApolloLogicImpl {
 		return apolloPersist.getParties(uname, db);
 	}
 	
+	public int getParty(int party_id){
+		return apolloPersist.getParty(party_id);
+	}
 	
 	
 	

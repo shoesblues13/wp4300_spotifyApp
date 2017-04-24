@@ -32,13 +32,13 @@
 		<div id="guestList">
 			<div id="homeButtons">
 				<form action="ApolloServlet" method="get" id="guestListEdit">
-					<label for="addGuest">Enter Username:</label>
+					<label for="addGuest">Enter a Username:</label>
 					<input type="text" id="guestListEdit" name="newGuest" required/>
 					<input type="submit" name="button" value="Entery Guest" />
 				</form>
 			</div>
 			Guests:<br/><br/>
-			<#if guestList??>${guestList}<#else>Guest List</#if>
+			<#if guestList??>${guestList}<#else></#if>
 		</div>
 
 		<div id="toBringList">
@@ -46,7 +46,7 @@
 				<input type="submit" name="button" value="Edit To-Bring List" />
 			</div>	
 			Things to Bring:<br/><br/>
-			<#if toBringList??>${toBringList}<#else>To Bring List</#if>
+			<#if toBringList??>${toBringList}<#else></#if>
 		</div>
 
 		<div id="musicPlaylist">

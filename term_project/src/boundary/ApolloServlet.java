@@ -116,9 +116,10 @@ public class ApolloServlet extends HttpServlet {
 						session.setAttribute("template", "userHome.html");
 						root.put("test",session.getAttribute("user"));
 						}
+						/*
 						SimpleSequence partiesSeq = logicImpl.getParties(uname, db);
 						SimpleSequence userSeq = logicImpl.getUserInvited(uname, db);
-						
+						*/
 						root.put("name", name);
 						root.put("user", check);
 						templateName="userHome.html";

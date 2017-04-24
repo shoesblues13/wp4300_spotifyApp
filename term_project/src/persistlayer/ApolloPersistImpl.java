@@ -57,5 +57,10 @@ public class ApolloPersistImpl {
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
+	public int getParty(int party_id){
+		Party p;
+		String sql = "SELECT * FROM party where party_id =\"" + party_id +"\";";;
+		return -1;
+	}
 	
 }
