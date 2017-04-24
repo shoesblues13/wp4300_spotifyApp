@@ -1,6 +1,9 @@
 package logiclayer;
 
 import persistlayer.ApolloPersistImpl;
+
+import java.sql.ResultSet;
+
 import objectlayer.*;
 
 public class ApolloLogicImpl {
@@ -29,7 +32,12 @@ public class ApolloLogicImpl {
 		return apolloPersist.addParty(p);
 	}
 	
+	public ResultSet getParties(String uname){
+		return apolloPersist.getParties(uname);
+	}
 	
-	
+	public ResultSet getUserInvited(String uname){
+		return apolloPersist.getParties(uname);
+	}
 	
 }

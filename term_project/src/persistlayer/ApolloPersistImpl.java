@@ -2,6 +2,7 @@ package persistlayer;
 import objectlayer.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 
 import boundary.PasswordHash;
 public class ApolloPersistImpl {
@@ -38,5 +39,13 @@ public class ApolloPersistImpl {
 		return DbAccessImpl.create(sql);
 	}
 	
+	public ResultSet getParties(String uname){
+		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
+		return DbAccessImpl.retrieve(sql);
+	}
 	
+	public ResultSet getUserInvited(String uname){
+		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
+		return DbAccessImpl.retrieve(sql);
+	}
 }
