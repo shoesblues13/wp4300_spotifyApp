@@ -2,6 +2,8 @@ package boundary;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ import boundary.TemplateProcessor;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
+import freemarker.template.SimpleSequence;
 import logiclayer.ApolloLogicImpl;
+import pojo.Movie;
 
 /**
  * Servlet implementation class ApolloServlet
@@ -118,22 +122,51 @@ public class ApolloServlet extends HttpServlet {
 						root.put("name", name);
 						root.put("user", check);
 						templateName="userHome.html";
-						
-						
 					}
 					else{
 						templateName="signIn.html";
-					}
-					
-					
+					}	
 				}
+				
+				
+				else if(page.equals("viewParty")){
+					String clickAddGuest = request.getParameter("clickAddGuest"); 
+					String username = (String) session.getAttribute("user");
+					if(clickAddGuest!=null){
+						String newGuest = request.getParameter("newGuest");
+						
+					}
+				}
+				
+				
 				else {
 					if(page.equals("userHome")){
 						session = request.getSession();
+						String uname = (String) session.getAttribute("user");
 						if (session !=null){
 							String button1 = request.getParameter("button1");
 							String button2 = request.getParameter("button2");
 							String button3 = request.getParameter("button3");
+							
+							
+							
+							
+							
+							
+							
+							
+							SimpleSequence partiesSeq = new SimpleSequence(db.build());
+							ResultSet userParties = logicImpl.getParties(uname);
+							try {
+								while(userParties.next()){
+									String temp = userParties.getString(1);
+									partiesSeq.add(temp);
+								}
+							root.put("userParties", partiesSeq);
+							} catch (SQLException e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}				
 							if (button1 != null){
 								root.put("check", "it works");
 								templateName="test.ftl";
@@ -164,8 +197,8 @@ public class ApolloServlet extends HttpServlet {
 						}
 						
 					}
+					
 					else {
-						
 						root.put("check", page);
 					}
 				}
