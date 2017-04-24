@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import freemarker.template.DefaultObjectWrapperBuilder;
+import freemarker.template.SimpleSequence;
 import persistlayer.DbAccessConfiguration;
 
 public class DbAccessImpl {
@@ -31,8 +33,7 @@ public class DbAccessImpl {
 	 * @param query
 	 * @return
 	 */
-	public static ResultSet retrieve (String query) {
-		con = connect();
+	public static ResultSet retrieve (String query, Connection con) {
 		ResultSet rset = null;
 		try {
 			Statement stmt = con.createStatement();
@@ -112,8 +113,8 @@ public class DbAccessImpl {
 	} // end of closeConnection
 	
 	public static String getString(String sql, String toget) {
-		Connection c = connect();
-		ResultSet rs = retrieve(sql);
+		Connection con = connect();
+		ResultSet rs = retrieve(sql,con);
 		String r = null;
 		try {
 			if (rs.next())
@@ -122,13 +123,13 @@ public class DbAccessImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		disconnect(c);
+		disconnect(con);
 		return r;	
 	}
 	
 	public static int getInt(String sql, String toget){
 		Connection c = connect();
-		ResultSet rs = retrieve(sql);
+		ResultSet rs = retrieve(sql, c);
 		int r = 0;
 		try {
 			if (rs.next())
@@ -139,6 +140,24 @@ public class DbAccessImpl {
 		}
 		disconnect(c);
 		return r;	
+	}
+	
+	public static SimpleSequence getSequence(String sql, DefaultObjectWrapperBuilder db){
+		Connection c = connect();
+		ResultSet rs = retrieve(sql, c);
+		SimpleSequence sq = new SimpleSequence(db.build());
+		try {
+				while(rs.next()){
+					String temp = rs.getString(1);
+					sq.add(temp);
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		
+		disconnect(c);
+		return sq;
+		
 	}
 	
 }

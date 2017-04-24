@@ -3,7 +3,7 @@ package objectlayer;
 public class Party {
 	
 	private String name;
-	private String host;
+	private int host;
 	private String stime;
 	private String description;
 	private String location;
@@ -13,17 +13,16 @@ public class Party {
 	private String key;
 	private String etime;
 	private String status;
-	public Party(String name, String host, String description, String stime, String etime, String location, Boolean pub, int score, String key, String status){
+	public Party(String name, String stime, String etime,String description, String location, Boolean pub, int hostId){
 		this.name = name;
-		this.host = host;
+		this.host = hostId;
 		this.description = description;
 		this.stime = stime;
 		this.etime = etime;
 		this.location = location;
 		this.pub = pub;
-		this.score = score;
-		this.key= key;
-		this.status = status;
+
+
 		
 	}
 	public String getStatus() {
@@ -79,10 +78,10 @@ public class Party {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getHost() {
+	public int getHost() {
 		return host;
 	}
-	public void setHost(String host) {
+	public void setHost(int host) {
 		this.host = host;
 	}
 	public String getKey() {

@@ -2,9 +2,10 @@ package persistlayer;
 import objectlayer.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
 
 import boundary.PasswordHash;
+import freemarker.template.DefaultObjectWrapperBuilder;
+import freemarker.template.SimpleSequence;
 public class ApolloPersistImpl {
 
 	
@@ -35,17 +36,26 @@ public class ApolloPersistImpl {
 	}
 	
 	public int addParty(Party p) {
-		String sql = "INSERT into party  (name,stime,etime,description,location,public,score,status) VALUES('"+p.getName()+"','"+p.getStime()+"','"+p.getEtime()+"','"+p.getDescription()+"','"+p.getLocation()+"','"+p.getPub()+"','"+p.getScore()+"','"+p.getStatus() + "');"; 
-		return DbAccessImpl.create(sql);
+		int pub = 0;
+		if(p.getPub()){
+			pub = 1;
+		}
+		String sql = "INSERT into party  (name,stime,etime,description,location,public, user_id) VALUES('"+p.getName()+"','"+p.getStime()+"','"+p.getEtime()+"','"+p.getDescription()+"','"+p.getLocation()+"','"+pub+"','"+p.getHost() + "');"; 
+		DbAccessImpl.create(sql);
+		String sql2 = "SELECT party_id FROM party where name=\"" + p.getName() + "\";";
+		int party_id = DbAccessImpl.getInt(sql2, "party_id");
+		return party_id;
 	}
 	
-	public ResultSet getParties(String uname){
+	public SimpleSequence getParties(String uname, DefaultObjectWrapperBuilder db){
 		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
-		return DbAccessImpl.retrieve(sql);
+		return DbAccessImpl.getSequence(sql, db);
 	}
 	
-	public ResultSet getUserInvited(String uname){
+	public SimpleSequence getUserInvited(String uname, DefaultObjectWrapperBuilder db){
 		String sql = "SELECT name FROM party WHERE user_id = (SELECT user_id FROM users WHERE uname = '"+uname+"')";
-		return DbAccessImpl.retrieve(sql);
+		return DbAccessImpl.getSequence(sql, db);
 	}
+	
+	
 }

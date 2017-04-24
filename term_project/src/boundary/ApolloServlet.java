@@ -2,8 +2,6 @@ package boundary;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,7 +18,6 @@ import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
 import freemarker.template.SimpleSequence;
 import logiclayer.ApolloLogicImpl;
-import pojo.Movie;
 
 /**
  * Servlet implementation class ApolloServlet
@@ -119,54 +116,30 @@ public class ApolloServlet extends HttpServlet {
 						session.setAttribute("template", "userHome.html");
 						root.put("test",session.getAttribute("user"));
 						}
+						SimpleSequence partiesSeq = logicImpl.getParties(uname, db);
+						SimpleSequence userSeq = logicImpl.getUserInvited(uname, db);
+						
 						root.put("name", name);
 						root.put("user", check);
 						templateName="userHome.html";
+						
+						
 					}
 					else{
 						templateName="signIn.html";
-					}	
-				}
-				
-				
-				else if(page.equals("viewParty")){
-					String clickAddGuest = request.getParameter("clickAddGuest"); 
-					String username = (String) session.getAttribute("user");
-					if(clickAddGuest!=null){
-						String newGuest = request.getParameter("newGuest");
-						
 					}
+					
+					
 				}
-				
-				
 				else {
 					if(page.equals("userHome")){
 						session = request.getSession();
-						String uname = (String) session.getAttribute("user");
 						if (session !=null){
 							String button1 = request.getParameter("button1");
 							String button2 = request.getParameter("button2");
 							String button3 = request.getParameter("button3");
 							
 							
-							
-							
-							
-							
-							
-							
-							SimpleSequence partiesSeq = new SimpleSequence(db.build());
-							ResultSet userParties = logicImpl.getParties(uname);
-							try {
-								while(userParties.next()){
-									String temp = userParties.getString(1);
-									partiesSeq.add(temp);
-								}
-							root.put("userParties", partiesSeq);
-							} catch (SQLException e2) {
-								// TODO Auto-generated catch block
-								e2.printStackTrace();
-							}				
 							if (button1 != null){
 								root.put("check", "it works");
 								templateName="test.ftl";
@@ -183,6 +156,39 @@ public class ApolloServlet extends HttpServlet {
 						}
 						
 					}
+					else if (page.equals("newParty")){
+						String name = request.getParameter("pname");
+						String desc = request.getParameter("pdesc");
+						String address = request.getParameter("address");
+						String timeStart = request.getParameter("timeStart");
+						String timeEnd = request.getParameter("timeEnd");
+						String radio = request.getParameter("partyType");
+						session = request.getSession();
+						int hostId;
+						synchronized(session){
+							hostId = (int) session.getAttribute("user");
+						}
+						Boolean pub = true;
+						if (!radio.equals("public"))
+							pub = false;
+						int party_id = logicImpl.createParty(name,timeStart, timeEnd, desc, address, pub,hostId);
+						if (party_id > 0){
+							synchronized(session){
+								session.setAttribute("party_id", party_id);
+							}
+							root.put("partyName", name);
+							root.put("partyDesc", desc);
+							root.put("address", address);
+							root.put("timeStart", timeStart);
+							root.put("timeEnd", timeEnd);
+							templateName="viewParty.html";
+						}
+						else {
+							templateName="test.ftl";
+							root.put("check", desc);
+							
+						}
+					}
 					else if (page.equals("validate")){
 						String name= request.getParameter("name");
 						String input = request.getParameter("input");
@@ -197,8 +203,8 @@ public class ApolloServlet extends HttpServlet {
 						}
 						
 					}
-					
 					else {
+						
 						root.put("check", page);
 					}
 				}

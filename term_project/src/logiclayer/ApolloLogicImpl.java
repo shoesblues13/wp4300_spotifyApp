@@ -1,9 +1,8 @@
 package logiclayer;
 
 import persistlayer.ApolloPersistImpl;
-
-import java.sql.ResultSet;
-
+import freemarker.template.DefaultObjectWrapperBuilder;
+import freemarker.template.SimpleSequence;
 import objectlayer.*;
 
 public class ApolloLogicImpl {
@@ -27,17 +26,20 @@ public class ApolloLogicImpl {
 		return apolloPersist.getName(uname);
 	}
 	
-	public int createParty(String name, String host, String stime, String etime,String description, String location, Boolean pub, int score, String key, String status ) {
-		Party p = new Party(name,host,stime,etime,description,location,pub,score,key,status);
+	public int createParty(String name, String timeStart, String stime, String etime,String description, Boolean pub, int hostId) {
+		Party p = new Party(name,timeStart,stime,etime,description,pub,hostId);
 		return apolloPersist.addParty(p);
 	}
 	
-	public ResultSet getParties(String uname){
-		return apolloPersist.getParties(uname);
+	public SimpleSequence getParties(String uname, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getParties(uname, db);
 	}
 	
-	public ResultSet getUserInvited(String uname){
-		return apolloPersist.getParties(uname);
+	public SimpleSequence getUserInvited(String uname, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getParties(uname, db);
 	}
+	
+	
+	
 	
 }
