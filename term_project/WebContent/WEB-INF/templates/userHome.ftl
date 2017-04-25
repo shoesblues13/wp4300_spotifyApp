@@ -20,12 +20,10 @@
 		<div id="userDash">
 			<h1>Welcome ${name}!</h1>
 			<div id="homeButtons">
-				<form method="get" action="signIn.html">
+				<form action="ApolloServlet" method="post" id="">
 					<input type="submit" name="button" value="View Invites" />
 					<input type="submit" name="button" value="Host a New Party" />
 					<input type="submit" name="button" value="Find a Party" />
-					<input type="hidden" name="${user?html}" id="user">
-					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>	
 			</div>
 		</div>
