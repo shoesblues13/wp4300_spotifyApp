@@ -54,6 +54,13 @@ public class ApolloLogicImpl {
 		return apolloPersist.getTrending();
 	}
 	
+	public SimpleSequence getMusicList(int party_id, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getMusicList(party_id, db);
+	}
+	
+	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getBringlist(party_id, db);
+	}
 	
 	
 }
