@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>View <#if partyName??>${partyName}<#else>Party Name</#if></title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title"><#if partyName??>${partyName}<#else>Party Name</#if></span>
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="post">
+					<input type="submit" name="home" value="Home" form="header" />
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="post" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<div id="dashboard" class="homeDivs">
+
+		<div id="partyInfo">
+			Click to upvote this party: <span class="vote"> </span>
+
+			<script type="text/javascript">
+		        $('.vote').click(function () {
+		  		$(this).toggleClass('on');
+				});
+	    	</script>
+
+	    	<br/><br/>
+
+
+
+			<br/><br/>
+
+			<h2>Description:</h2>
+			<p><#if partyDesc??>${partyDesc}<#else>Party Description Here</#if></p>
+			<br/>
+			<h2>Address:</h2>
+			<p><#if address??>${address}<#else>Address Here</#if></p>
+			<br/>
+			<p>From <#if timeStart??>${timeStart}<#else>Time Start here</#if> to <#if timeEnd??>${timeEnd}<#else>Time End here</#if></p>
+		</div>
+
+		<div id="guestList">
+			<div id="homeButtons">
+				<form action="ApolloServlet" method="post" id="guestListEdit">
+					<label for="addGuest">Enter a username:</label>
+					<input type="text" id="guestListEdit" name="addGuest" required/>
+					<input type="submit" name="button" value="Add Guest" />
+					<input type="hidden" name="page" value="viewParty"/>
+				</form>
+			</div>
+			Guests:<br/><br/>
+			<#if guestList??>
+			<table>
+			<#list guestList as guestList>
+			<tr><td>${guestList}
+			</#list>
+			</table>
+			<#else>Im a taco</#if>
+		</div>
+
+		<div id="toBringList">
+			<div id="homeButtons">
+				<form action="ApolloServlet" method="post" id="bringListEdit">
+					<label for="newItem">Enter a new item:</label>
+					<input type="text" id="bringListEdit" name="newItem" required/>
+					<input type="submit" name="addItem" value="Add Item" />
+					<input type="hidden" name="page" value="viewParty"/>
+				</form>
+			</div>	
+			Things to Bring:<br/><br/>
+			<#if bringSeq??>
+			<table>
+			<#list bringSeq as bringSeq>
+			<tr><td>${bringSeq}
+			</#list>
+			</table>
+			<#else>NOthing in bringlist</#if>
+		</div>
+
+		<div id="musicPlaylist">
+			<div id="homeButtons">
+				<form action="ApolloServlet" method="post" id="musicEdit">
+					<label for="newSong">Enter a new song:</label>
+					<input type="text" id="musicEdit" name="newSong" required/>
+					<input type="submit" name="addSong" value="Add Song" />
+					<input type="hidden" name="page" value="viewParty"/>
+				</form>
+			</div>	
+			Music Recommendations:<br/><br/>
+			<#if musicSeq??><table border>
+			<#list musicSeq as musicSeq>
+			<table>
+			<tr><td>${musicSeq}
+			</#list><#else></#if>
+			</table>
+		</div>
+		<span class="stretch"></span>
+	</div>
+</body>
+</html>
