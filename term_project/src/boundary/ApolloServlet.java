@@ -69,6 +69,7 @@ public class ApolloServlet extends HttpServlet {
 				String bringitem = request.getParameter("bringitem");
 				String musicEdit = request.getParameter("musicEdit");
 				String guestListEdit = request.getParameter("guestListEdit");
+				
 				String templateName = "test.ftl";
 				String home = request.getParameter("home");
 				String logout = request.getParameter("logout");
@@ -77,13 +78,13 @@ public class ApolloServlet extends HttpServlet {
 				String trending = request.getParameter("trending");
 				ApolloLogicImpl logicImpl = new ApolloLogicImpl();
 				HttpSession session = request.getSession(false);
-				String servletName = "apollo";
 				DefaultObjectWrapperBuilder db = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
 				SimpleHash root = new SimpleHash(db.build());
 				root.put("name", page);
+				root.put("again", "");
 				
 				
-				if(logout !=null){
+				if(logout !=null && session !=null){
 					session.invalidate();
 					processor.processTemplate("index.html", root, request, response);
 					
@@ -109,13 +110,13 @@ public class ApolloServlet extends HttpServlet {
 					if (trending != null){
 						getFiveTrending(response);
 					}
-					else if(bringitem != null){
+					else if(bringitem != null & session !=null){
 						addItem(request,bringitem);
 					}
-					else if(musicEdit != null){
+					else if(musicEdit != null && session != null){
 						addMusic(request,musicEdit);
 					}
-					else if(guestListEdit != null){
+					else if(guestListEdit != null && session !=null){
 						addGuest(request,guestListEdit, response);
 					}
 					else if (page.equals("index")){
@@ -128,24 +129,30 @@ public class ApolloServlet extends HttpServlet {
 						templateName="signIn.html";
 					}
 					else if (page.equals("create")) {
-						String fname = request.getParameter("fname");
-						String lname = request.getParameter("lname");
-						String email = request.getParameter("email");
-						String uname = request.getParameter("uname");
-						String pword = request.getParameter("pword");
-						String pword2 = request.getParameter("pword2");
-						if(!pword.equals(pword2)){
-							templateName="test.ftl";
-							root.put("check", "pwords arent equal");
-						}
-						else {
-							int check = logicImpl.createUser(fname, lname, email, uname, pword);
-							if (check != -1){
-								templateName="signupSuccess.html";
+						String signin = request.getParameter("signin");
+						if (signin == null){
+							String fname = request.getParameter("fname");
+							String lname = request.getParameter("lname");
+							String email = request.getParameter("email");
+							String uname = request.getParameter("uname");
+							String pword = request.getParameter("pword");
+							String pword2 = request.getParameter("pword2");
+							if(!pword.equals(pword2)){
+								templateName="test.ftl";
+								root.put("check", "pwords arent equal");
 							}
 							else {
-								templateName = "../../createAccount.html";
+								int check = logicImpl.createUser(fname, lname, email, uname, pword);
+								if (check != -1){
+									templateName="signupSuccess.html";
+								}
+								else {
+									templateName = "../../createAccount.html";
+								}
 							}
+						}
+						else {
+							templateName="signIn.html";
 						}
 					}
 					else if (page.equals("login")){
@@ -176,20 +183,18 @@ public class ApolloServlet extends HttpServlet {
 					}
 					else if(page.equals("userHome") && session != null){
 							session = request.getSession(false);
-							if (session !=null){
-								String button1 = request.getParameter("button1");
+							
 								String button2 = request.getParameter("button2");
 								String button3 = request.getParameter("button3");
 								String button4 = request.getParameter("button4");
-							if (button1 != null){
-								root.put("check", "it works");
-								templateName="test.ftl";
-							}
-							else if (button2 != null){
+								
+							if (button2 != null){
 								templateName="newParty.html";
 							}
 							else if (button3 != null){
-								templateName="viewParty.html";
+								SimpleSequence publicParties = logicImpl.getPublicPartys(db);
+								root.put("publicParties", publicParties);
+								templateName="viewPublicParties.html";
 							}
 							else if (button4!=null){
 								String party = request.getParameter("party");
@@ -215,12 +220,9 @@ public class ApolloServlet extends HttpServlet {
 								root.put("address", p.getLocation());
 								root.put("timeStart", p.getStime());
 								root.put("timeEnd", p.getEtime());
+								root.put("owner", "yes");
 								templateName="viewParty.html";
 							}
-						}
-						else {
-							templateName="signIn.html";
-						}
 						
 					}
 					else if (page.equals("newParty") && session !=null){
@@ -255,7 +257,7 @@ public class ApolloServlet extends HttpServlet {
 							root.put("address", p.getLocation());
 							root.put("timeStart", p.getStime());
 							root.put("timeEnd", p.getEtime());
-							
+							root.put("owner", "yes");
 							templateName="viewParty.html";
 						}
 						else {
@@ -264,7 +266,34 @@ public class ApolloServlet extends HttpServlet {
 							
 						}
 					}
-					else if (page.equals("viewParty") && session !=null){
+					else if(page.equals("viewPublicParties")){
+						String party = request.getParameter("party");
+						int user_id;
+						synchronized(session){
+							user_id = (int) session.getAttribute("user");
+						}
+						Party p = logicImpl.getParty(party, user_id);
+						int party_id= p.getPartyId();
+						synchronized(session){
+							 session.setAttribute("party_id",party_id);
+						}
+						SimpleSequence sb = logicImpl.getGuestList(party_id, db);
+						SimpleSequence musicSeq = logicImpl.getMusicList(party_id, db);
+						SimpleSequence bringSeq = logicImpl.getBringList(party_id, db);
+						
+						
+						root.put("guestList", sb);
+						root.put("musicSeq", musicSeq);
+						root.put("bringSeq", bringSeq);
+						root.put("partyName", p.getName());
+						root.put("partyDesc", p.getDescription());
+						root.put("address", p.getLocation());
+						root.put("timeStart", p.getStime());
+						root.put("timeEnd", p.getEtime());
+						templateName="viewParty.html";
+						root.put("owner", "no");
+					}
+					/*else if (page.equals("viewParty") && session !=null){
 						int party_id;
 						String addBringList = request.getParameter("addItem");
 						String addMusicList = request.getParameter("addSong");
@@ -301,8 +330,9 @@ public class ApolloServlet extends HttpServlet {
 						root.put("timeStart", p.getStime());
 						root.put("timeEnd", p.getEtime());
 						templateName="viewParty.html";
-					}
+					}*/
 					else if (session == null){
+						root.put("again", "Session has expired. Please Sign in again!");
 						templateName="signIn.html";
 					}
 					else {	
@@ -323,7 +353,7 @@ public class ApolloServlet extends HttpServlet {
 				String json = gson.toJson(partys,type);
 				try {
 					PrintWriter out = response.getWriter();
-					out.println(json);
+					out.println("this is a test");
 				}catch (IOException e){
 					e.printStackTrace();
 				}

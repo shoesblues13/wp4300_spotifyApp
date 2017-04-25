@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<link href="CSS/style.css" type="text/css" rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts/upvote.js"></script>
 	<script type="text/javascript" src="scripts/update.js"></script>
@@ -10,6 +10,7 @@
 	<title>View <#if partyName??>${partyName}<#else>Party Name</#if></title>
 </head>
 <body>
+	
 	<div id="topBar" class="homeDivs">
 		<span id="title"><#if partyName??>${partyName}<#else>Party Name</#if></span>
 		<div id="sign">
@@ -76,9 +77,8 @@
 					<input type="submit" name="addItem" value="Add Item" id="addItem"/>
 					<input type="hidden" name="page" value="viewParty"/>
 				
-			</div>
-			<br/><br/>	
-			Things to Bring:<br/><br/>
+			</div>	
+			<br/><br/>Things to Bring:<br/><br/>
 			<#if bringSeq??>
 			<table id="bringTable">
 			<#list bringSeq as bringSeq>
@@ -96,11 +96,9 @@
 					<input type="submit" name="addSong" value="Add Song" id="addSong"/>
 
 
-			</div>
-			<br/><br/>	
-			Music Recommendations:<br/><br/>
+			</div>	
+			<br/><br/>Music Recommendations:<br/><br/>
 			<#if musicSeq??><table id="musicTable" >
-			<table>
 			<#list musicSeq as musicSeq>
 			<tr><td>${musicSeq}
 			</#list><#else></#if>

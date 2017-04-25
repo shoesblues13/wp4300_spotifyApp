@@ -86,6 +86,8 @@ public class ApolloLogicImpl {
 	public Party getParty(String name,int user_id){
 		return apolloPersist.getParty(name, user_id);
 	}
-	
+	public SimpleSequence getPublicPartys(DefaultObjectWrapperBuilder db){
+		return apolloPersist.getPublicPartys(db);
+	}
 	
 }

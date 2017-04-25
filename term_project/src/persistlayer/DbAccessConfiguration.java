@@ -8,5 +8,5 @@ public abstract class DbAccessConfiguration {
 	
 	static final String DB_CONNECTION_USERNAME = "root";
 	
-	static final String DB_CONNECTION_PASSWORD = "blitzx970.";
+	static final String DB_CONNECTION_PASSWORD = "root";
 }
