@@ -116,4 +116,11 @@ public class ApolloPersistImpl {
 		return -1;
 	}
 	
+	public Party getParty(String name, int user_id){
+		String sql = "SELECT party_id FROM party WHERE name=\""+name+"\" AND user_id=\"" +user_id + "\";";
+		int party_id = DbAccessImpl.getInt(sql, "party_id");
+		Party p = getParty(party_id);
+		return p;
+	}
+	
 }

@@ -178,6 +178,7 @@ public class DbAccessImpl {
 				p.setDescription(rs.getString("description"));
 				p.setLocation(rs.getString("location"));
 				p.setHost(rs.getInt("user_id"));
+				p.setPartyId(rs.getInt("party_id"));
 				if (rs.getInt("public")==1)
 					p.setPub(true);
 				else 

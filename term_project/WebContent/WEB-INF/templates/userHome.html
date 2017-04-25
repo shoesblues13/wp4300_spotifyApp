@@ -34,11 +34,15 @@
 
 		<div id="hostingParties">
 			Parties Hosted
+			<form method="post" action="ApolloServlet">
 			<table>
 			<#list partiesSeq as partySeq>
-			<tr><td>${partySeq}
+			<tr><td><input type="radio" name="party" value="${partySeq?html}"/>${partySeq}
 			</#list>
 			</table>
+			<input type="submit" name="button4" value="view"/>
+			<input type="hidden" name="page" value="userHome"/>
+			</form>
 		</div>
 
 		<div id="attendingParties">

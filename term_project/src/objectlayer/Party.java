@@ -13,6 +13,7 @@ public class Party {
 	private String key;
 	private String etime;
 	private String status;
+	private int party_id;
 	
 	public Party(){
 		
@@ -93,5 +94,11 @@ public class Party {
 	}
 	public void setKey(String key) {
 		this.key = key;
+	}
+	public void setPartyId(int party_id){
+		this.party_id= party_id;
+	}
+	public int getPartyId(){
+		return this.party_id;
 	}
 }
