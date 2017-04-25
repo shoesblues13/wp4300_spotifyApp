@@ -44,7 +44,7 @@
 			<#list guestList as guestList>
 			<tr><td>${guestList}
 			</#list>
-			<#else></#if>
+			<#else>Im a taco</#if>
 		</div>
 
 		<div id="toBringList">
@@ -52,7 +52,12 @@
 				<input type="submit" name="button" value="Edit To-Bring List" />
 			</div>	
 			Things to Bring:<br/><br/>
-			<#if toBringList??>${toBringList}<#else></#if>
+			<#if toBringList??>
+			<table border=1>
+			<#list bringSeq as bringSeq>
+			<tr><td>${bringSeq}
+			</#list>
+			<#else>NOthing in bringlist</#if>
 		</div>
 
 		<div id="musicPlaylist">
@@ -60,7 +65,10 @@
 				<input type="submit" name="button" value="Edit Playlist" />
 			</div>	
 			Music Recommendations:<br/><br/>
-			<#if musicList??>${musicList}<#else></#if>
+			<#if musicList??><table border=1>
+			<#list musicSeq as musicSeq>
+			<tr><td>${musicSeq}
+			</#list>No Music List<#else></#if>
 		</div>
 		<span class="stretch"></span>
 	</div>

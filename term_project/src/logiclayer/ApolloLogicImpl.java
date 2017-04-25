@@ -59,7 +59,7 @@ public class ApolloLogicImpl {
 	}
 	
 	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
-		return apolloPersist.getBringlist(party_id, db);
+		return apolloPersist.getBringList(party_id, db);
 	}
 	
 	

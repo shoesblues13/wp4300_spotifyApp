@@ -80,7 +80,7 @@ public class ApolloPersistImpl {
 	}
 	
 	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT songlist FROM songlist WHERE party_id = '"+party_id+"';";
+		String sql = "SELECT songlist FROM music WHERE party_id = '"+party_id+"';";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 }
