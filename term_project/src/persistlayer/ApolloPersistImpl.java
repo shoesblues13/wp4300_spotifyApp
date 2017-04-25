@@ -73,4 +73,14 @@ public class ApolloPersistImpl {
 		String sql = "SELECT * from party;";
 		return DbAccessImpl.getTrending(sql);
 	}
+	
+	public SimpleSequence getMusicList(int party_id, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT bringlist FROM bringlist WHERE party_id ='"+party_id+"';";
+		return DbAccessImpl.getSequence(sql, db);
+	}
+	
+	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT songlist FROM songlist WHERE party_id = '"+party_id+"';";
+		return DbAccessImpl.getSequence(sql, db);
+	}
 }
