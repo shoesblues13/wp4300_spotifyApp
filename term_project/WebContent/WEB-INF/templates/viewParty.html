@@ -52,12 +52,7 @@
 				<input type="submit" name="button" value="Edit To-Bring List" />
 			</div>	
 			Things to Bring:<br/><br/>
-			<#if toBringList??>
-			<table border=1>
-			<#list bringSeq as bringSeq>
-			<tr><td>${bringSeq}
-			</#list>
-			<#else></#if>
+			<#if toBringList??>${toBringList}<#else></#if>
 		</div>
 
 		<div id="musicPlaylist">
@@ -65,10 +60,7 @@
 				<input type="submit" name="button" value="Edit Playlist" />
 			</div>	
 			Music Recommendations:<br/><br/>
-			<#if musicList??><table border=1>
-			<#list bringSeq as bringSeq>
-			<tr><td>${bringSeq}
-			</#list><#else></#if>
+			<#if musicList??>${musicList}<#else></#if>
 		</div>
 		<span class="stretch"></span>
 	</div>

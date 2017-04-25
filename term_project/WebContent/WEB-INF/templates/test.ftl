@@ -10,9 +10,7 @@
 		<div class="error">
 		<br>
 			<table border=1>
-<#list partyDesc as partyDesc>
-<tr><td>${partyDesc}
-</#list>
+
 			
 		</div>
 	</body>

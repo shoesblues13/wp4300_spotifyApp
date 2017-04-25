@@ -204,10 +204,11 @@ public class DbAccessImpl {
 				++counter;
 			} // end of while
 			rs.close();
-			con.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		disconnect(c);
 		return partys;
 	}
 }
