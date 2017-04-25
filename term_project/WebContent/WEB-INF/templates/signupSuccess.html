@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Apollo Sign In</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Sign In</span>
+		<form method="post" action="ApolloServlet">
+		    <div id="signin">
+              <input type="submit" name="button" value="Sign In"  />
+              <input type="hidden" name="page" value="success"/>
+            </div>
+		</form>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			<p>Account created successfully! Sign in above.</p>
+		</div>
+	</div>
+</body>
+</html>
