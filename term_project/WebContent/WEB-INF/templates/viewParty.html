@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="finalProject.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/upvote.js"></script>
+	<script type="text/javascript" src="scripts/update.js"></script>
 	<title>View <#if partyName??>${partyName}<#else>Party Name</#if></title>
 </head>
 <body>
@@ -31,11 +32,6 @@
 		<div id="partyInfo">
 			Click to upvote this party: <span class="vote"> </span>
 
-			<script type="text/javascript">
-		        $('.vote').click(function () {
-		  		$(this).toggleClass('on');
-				});
-	    	</script>
 
 	    	<br/><br/>
 
@@ -54,16 +50,15 @@
 
 		<div id="guestList">
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="post" id="guestListEdit">
+				
 					<label for="addGuest">Enter a username:</label>
 					<input type="text" id="guestListEdit" name="addGuest" required/>
-					<input type="submit" name="button" value="Add Guest" />
-					<input type="hidden" name="page" value="viewParty"/>
-				</form>
+					<input type="submit" name="button" value="Add Guest" id="addGuest"/>
+				
 			</div>
 			Guests:<br/><br/>
 			<#if guestList??>
-			<table>
+			<table id="guestTable">
 			<#list guestList as guestList>
 			<tr><td>${guestList}
 			</#list>
@@ -73,16 +68,16 @@
 
 		<div id="toBringList">
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="post" id="bringListEdit">
+				
 					<label for="newItem">Enter a new item:</label>
 					<input type="text" id="bringListEdit" name="newItem" required/>
-					<input type="submit" name="addItem" value="Add Item" />
+					<input type="submit" name="addItem" value="Add Item" id="addItem"/>
 					<input type="hidden" name="page" value="viewParty"/>
-				</form>
+				
 			</div>	
 			Things to Bring:<br/><br/>
 			<#if bringSeq??>
-			<table>
+			<table id="bringTable">
 			<#list bringSeq as bringSeq>
 			<tr><td>${bringSeq}
 			</#list>
@@ -92,17 +87,17 @@
 
 		<div id="musicPlaylist">
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="post" id="musicEdit">
+
 					<label for="newSong">Enter a new song:</label>
 					<input type="text" id="musicEdit" name="newSong" required/>
-					<input type="submit" name="addSong" value="Add Song" />
-					<input type="hidden" name="page" value="viewParty"/>
-				</form>
+					<input type="submit" name="addSong" value="Add Song" id="addSong"/>
+
+
 			</div>	
 			Music Recommendations:<br/><br/>
-			<#if musicSeq??><table border>
-			<#list musicSeq as musicSeq>
+			<#if musicSeq??><table id="musicTable" >
 			<table>
+			<#list musicSeq as musicSeq>
 			<tr><td>${musicSeq}
 			</#list><#else></#if>
 			</table>

@@ -26,7 +26,7 @@
 					<input type="submit" name="button2" value="Host a New Party" />
 					<input type="submit" name="button3" value="Find a Party" />
 					<input type="hidden" name="page" value="userHome"/>
-					<input type="hidden" name="user" value="${user?html}"/>
+					
 					
 				</form>	
 			</div>
@@ -34,24 +34,23 @@
 
 		<div id="hostingParties">
 			Parties Hosted
-			<table border=1>
+			<table>
 			<#list partiesSeq as partySeq>
-			<tr><td>${partySeq}</td></tr>
+			<tr><td>${partySeq}
 			</#list>
-			
-			
-				<#list partyIdSeq as partyIdSeq>
-					<form action="ApolloServlet" method="post" id="homePageForm">
-						<tr><td><button name="partyChoice" value="${partyIdSeq}">View This Party</button></td></tr>
-					</form>
-				</#list>
-				
-				
 			</table>
 		</div>
 
 		<div id="attendingParties">
 			Parties Attending
+			<#if userSeq??>
+			<table>
+			<#list userSeq as userSeq>
+			<tr><td>${userSeq}
+			</#list>
+			</table>
+			<#else></#if>
+			
 		</div>
 		<span class="stretch"></span>
 	</div>
