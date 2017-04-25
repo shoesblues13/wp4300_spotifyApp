@@ -34,23 +34,24 @@
 
 		<div id="hostingParties">
 			Parties Hosted
-			<table>
+			<table border=1>
 			<#list partiesSeq as partySeq>
-			<tr><td>${partySeq}
+			<tr><td>${partySeq}</td></tr>
 			</#list>
+			
+			
+				<#list partyIdSeq as partyIdSeq>
+					<form action="ApolloServlet" method="post" id="homePageForm">
+						<tr><td><button name="partyChoice" value="${partyIdSeq}">View This Party</button></td></tr>
+					</form>
+				</#list>
+				
+				
 			</table>
 		</div>
 
 		<div id="attendingParties">
 			Parties Attending
-			<#if userSeq??>
-			<table>
-			<#list userSeq as userSeq>
-			<tr><td>${userSeq}
-			</#list>
-			</table>
-			<#else></#if>
-			
 		</div>
 		<span class="stretch"></span>
 	</div>
