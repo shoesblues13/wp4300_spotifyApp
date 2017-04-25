@@ -14,13 +14,11 @@
 			<div class="headerButtons" id="homeButton">
 				<form method="get">
 					<input type="submit" name="button" value="Home" form="header" />
-					<input type="hidden" name="${userID?html}" id="userID">
 				</form>	
 			</div>
 			<div class="headerButtons" id="signOutButton">
 				<form method="get" id="header">
 					<input type="submit" name="logout" value="Sign Out" form="header" />
-					<input type="hidden" name="${userID?html}" id="userID">
 				</form>
 			</div>
 		</div>
@@ -36,7 +34,7 @@
 					<input type="submit" name="button2" value="Host a New Party" />
 					<input type="submit" name="button3" value="Find a Party" />
 					<input type="hidden" name="page" value="userHome"/>
-					<input type="hidden" name="user" value="${user?html}"/>
+					<input type="hidden" name="page" value="userHome"/>
 					
 				</form>	
 			</div>
