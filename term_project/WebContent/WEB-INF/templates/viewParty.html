@@ -58,8 +58,8 @@
 			<div id="homeButtons">
 				<form action="ApolloServlet" method="post" id="guestListEdit">
 					<label for="addGuest">Enter a username:</label>
-					<input type="text" id="guestListEdit" name="addGuest" required/>
-					<input type="submit" name="button" value="Add Guest" />
+					<input type="text" id="guestListEdit" name="newGuest" required/>
+					<input type="submit" name="guestEntry" value="Add Guest" />
 					<input type="hidden" name="${user?html}" id="user">
 					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>
