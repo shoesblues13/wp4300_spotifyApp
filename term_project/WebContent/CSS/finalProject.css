@@ -185,6 +185,29 @@ textarea {
 	text-align: justify;
 }
 
+.vote {
+  display: inline-block;
+  overflow: hidden;
+  width: 40px;
+  height: 25px;
+  cursor: pointer;
+  background: url("../images/upvote.png");
+  background-position: 0 -25px;
+} 
+
+
+.vote.on {
+  background-position: 0 2px;
+}
+
+table tr td {
+	border: 1px solid white;
+	width: 80%;
+}
+
+table {
+	border-collapse: collapse;
+}
 #homeButtons {
 	width: 50%;
 }
@@ -224,26 +247,3 @@ textarea {
 	float: right;
 }
 
-.vote {
-  display: inline-block;
-  overflow: hidden;
-  width: 40px;
-  height: 25px;
-  cursor: pointer;
-  background: url("../images/upvote.png");
-  background-position: 0 -25px;
-} 
-
-
-.vote.on {
-  background-position: 0 2px;
-}
-
-table, tr, td {
-	border: 1px solid white;
-	width: 80%;
-}
-
-table {
-	border-collapse: collapse;
-}

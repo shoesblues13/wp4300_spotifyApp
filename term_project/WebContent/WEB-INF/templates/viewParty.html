@@ -40,10 +40,11 @@
 			</div>
 			Guests:<br/><br/>
 			<#if guestList??>
-			<table border=1>
+			<table>
 			<#list guestList as guestList>
 			<tr><td>${guestList}
 			</#list>
+			</table>
 			<#else>Im a taco</#if>
 		</div>
 
@@ -52,11 +53,12 @@
 				<input type="submit" name="button" value="Edit To-Bring List" />
 			</div>	
 			Things to Bring:<br/><br/>
-			<#if toBringList??>
-			<table border=1>
+			<#if bringSeq??>
+			<table>
 			<#list bringSeq as bringSeq>
 			<tr><td>${bringSeq}
 			</#list>
+			</table>
 			<#else>NOthing in bringlist</#if>
 		</div>
 
@@ -67,8 +69,10 @@
 			Music Recommendations:<br/><br/>
 			<#if musicList??><table border=1>
 			<#list musicSeq as musicSeq>
+			<table>
 			<tr><td>${musicSeq}
 			</#list>No Music List<#else></#if>
+			</table>
 		</div>
 		<span class="stretch"></span>
 	</div>
