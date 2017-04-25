@@ -10,9 +10,19 @@
 <body>
 	<div id="topBar" class="homeDivs">
 		<span id="title">Apollo Dashboard</span>
-		
-		<div id="signin">
-			<input type="submit" name="logout" value="Sign Out" form="homePageForm" />	
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
 		</div>
 	</div>
 	<br/>
@@ -34,11 +44,16 @@
 
 		<div id="hostingParties">
 			Parties Hosted
-			<table>
-			<#list partiesSeq as partySeq>
-			<tr><td>${partySeq}
-			</#list>
-			</table>
+			
+			<div id="allTables">
+				<table>
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+				</table>	
+			</div>
 		</div>
 
 		<div id="attendingParties">

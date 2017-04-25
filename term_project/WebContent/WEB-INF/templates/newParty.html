@@ -9,28 +9,39 @@
 <body>
 	<div id="topBar" class="homeDivs">
 		<span id="title">Apollo New Party</span>
-		<div id="signin">
-			<input type="submit" name="logout" value="Sign Out" form="signUpForm" />
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
 		</div>
 	</div>
 	<br/>
 	<br/>
 	<div id="partyForm">
 		<div id="innerDiv" class="homeDivs">
-			<form action="ApolloServlet" method="post" id="creatParty">
+			<form action="ApolloServlet" method="post" id="">
 				<label for="pname">Party Name: </label><br/>
-				<input type="text" id="partyFormLabel" name="pname" required/><br/><br/>
+				<input type="text" id="partyFormLabel" name="pname" /><br/><br/>
 				<label for="pdesc">Description: </label>
-				<textarea rows="5" cols="10" id="partyForm" name="pdesc" form="creatParty" required></textarea><br/><br/>
+				<textarea rows="5" cols="10" id="partyForm" name="pdesc" form=""></textarea><br/><br/>
 				<label for="address">Address: </label>
-				<input type="text" id="partyFormLabel" name="address" required/><br/><br/>
+				<input type="text" id="partyFormLabel" name="address" /><br/><br/>
 				<div id="partyLeft">
 					<label for="timeStartH">Time Start: </label><br/>
-					<input type="datetime-local" id="partyFormLabel" name="timeStart" required/><br/>
+					<input type="datetime-local" id="partyFormLabel" name="timeStart" /><br/>
 				</div>
 				<div id="partyRight">
 					<label for="timeEnd">Time End: </label><br/>
-					<input type="datetime-local" id="partyFormLabel" name="timeEnd" required/><br/><br/>
+					<input type="datetime-local" id="partyFormLabel" name="timeEnd" /><br/><br/>
 				</div>
 				<br/><br/><br/><br/>
 				<input type="radio" name="partyType" value="public" checked>Public<br/>

@@ -9,9 +9,8 @@
 
 		<div class="error">
 		<br>
-			<table border=1>
-
-			
+			<p>Name is: ${name}</p>
+			<p>${check}</p>
 		</div>
 	</body>
 </html>

@@ -4,38 +4,64 @@
 	<meta charset="UTF-8">
 	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="finalProject.js"></script>
-	<title>View <#if partyName??>${partyName}<#else>Name</#if></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>View <#if partyName??>${partyName}<#else>Party Name</#if></title>
 </head>
 <body>
 	<div id="topBar" class="homeDivs">
-		<span id="title"> <#if partyName??>${partyName}<#else>Name</#if></span>
-		<div id="signin">
-			<form method="get" action="index.html">
-				<input type="submit" name="logout" value="Sign Out" form="signUpForm" />
-			</form>
+		<span id="title"><#if partyName??>${partyName}<#else>Party Name</#if></span>
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
 		</div>
 	</div>
 	<br/>
 	<br/>
 
 	<div id="dashboard" class="homeDivs">
+
 		<div id="partyInfo">
+			Click to upvote this party: <span class="vote"> </span>
+
+			<script type="text/javascript">
+		        $('.vote').click(function () {
+		  		$(this).toggleClass('on');
+				});
+	    	</script>
+
+	    	<br/><br/>
+
+	    	<h1><#if partyScore gt 0>+</#if> <#if partyScore??>${partyScore}<#else>(Party Score here)</#if></h1>
+
+			<br/><br/>
+
 			<h2>Description:</h2>
-			<p><#if partyDesc??>${partyDesc}<#else>Description</#if></p>
+			<p><#if partyDesc??>${partyDesc}<#else>Party Description Here</#if></p>
 			<br/>
 			<h2>Address:</h2>
-			<p><#if address??>${address}<#else>address</#if></p>
+			<p><#if address??>${address}<#else>Address Here</#if></p>
 			<br/>
-			<p>From <#if timeStart??>${timeStart}<#else>start</#if> to <#if timeEnd??>${timeEnd}<#else>end</#if></p>
+			<p>From <#if timeStart??>${timeStart}<#else>Time Start here</#if> to <#if timeEnd??>${timeEnd}<#else>Time End here</#if></p>
 		</div>
 
 		<div id="guestList">
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="post" id="">
-					<label for="addGuest">Enter a Username:</label>
-					<input type="text" id="guestListEdit" name="newGuest" required/>
-					<input type="submit" name="button" value="Entery Guest" />
-					<input type="hidden" name="page" value="viewParty"/>
+				<form action="ApolloServlet" method="post" id="guestListEdit">
+					<label for="addGuest">Enter a username:</label>
+					<input type="text" id="guestListEdit" name="addGuest" required/>
+					<input type="submit" name="button" value="Add Guest" />
+					<input type="hidden" name="${user?html}" id="user">
+					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>
 			</div>
 			Guests:<br/><br/>
@@ -50,7 +76,13 @@
 
 		<div id="toBringList">
 			<div id="homeButtons">
-				<input type="submit" name="button" value="Edit To-Bring List" />
+				<form action="ApolloServlet" method="post" id="bringListEdit">
+					<label for="newItem">Enter a new item:</label>
+					<input type="text" id="bringListEdit" name="newItem" required/>
+					<input type="submit" name="addItem" value="Add Item" />
+					<input type="hidden" name="${user?html}" id="user">
+					<input type="hidden" name="${partyID?html}" id="partyID">
+				</form>
 			</div>	
 			Things to Bring:<br/><br/>
 			<#if bringSeq??>
@@ -64,7 +96,13 @@
 
 		<div id="musicPlaylist">
 			<div id="homeButtons">
-				<input type="submit" name="button" value="Edit Playlist" />
+				<form action="ApolloServlet" method="post" id="musicEdit">
+					<label for="newSong">Enter a new song:</label>
+					<input type="text" id="musicEdit" name="newSong" required/>
+					<input type="submit" name="addSong" value="Add Song" />
+					<input type="hidden" name="${user?html}" id="user">
+					<input type="hidden" name="${partyID?html}" id="partyID">
+				</form>
 			</div>	
 			Music Recommendations:<br/><br/>
 			<#if musicList??><table border=1>
