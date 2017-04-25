@@ -193,6 +193,7 @@ public class ApolloServlet extends HttpServlet {
 							
 							SimpleSequence musicSeq = logicImpl.getMusicList(party_id, db);
 							SimpleSequence bringSeq = logicImpl.getBringList(party_id, db);
+						
 							
 							
 							root.put("guestList", sb);
@@ -223,8 +224,11 @@ public class ApolloServlet extends HttpServlet {
 						int party_id;
 						String addBringList = request.getParameter("addItem");
 						String addMusicList = request.getParameter("addSong");
+						String guestEntry = request.getParameter("guestEntry");
 						String bringListInput = request.getParameter("newItem");
 						String musicListInput = request.getParameter("newSong");
+						String newGuest = request.getParameter("newGuest");
+						
 						session = request.getSession();
 						int hostId;
 						synchronized(session){
@@ -239,6 +243,7 @@ public class ApolloServlet extends HttpServlet {
 						if(addMusicList!=null){
 							logicImpl.addMusicList(musicListInput, party_id);
 						}
+						
 						
 						
 						
