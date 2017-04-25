@@ -211,27 +211,5 @@ public class DbAccessImpl {
 		disconnect(c);
 		return partys;
 	}
-	
-	public static SimpleSequence getParties(String sql, DefaultObjectWrapperBuilder db){
-		Connection c = connect();
-		ResultSet rs = retrieve(sql, c);
-		SimpleSequence sq = new SimpleSequence(db.build());
-		int counter = 0;
-		try {
-				
-				while(rs.next() && counter < 15){
-					String temp = rs.getString(1);
-					sq.add(temp);
-					++counter;
-				}
-			
-			}catch (SQLException e){
-				e.printStackTrace();
-			}
-		
-		disconnect(c);
-		return sq;
-		
-	}
 }
 
