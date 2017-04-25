@@ -64,8 +64,14 @@
 					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>
 			</div>
-			<br/>Guests:<br/><br/>
-			<#if guestList??>${guestList}<#else>Bring List here</#if>
+			Guests:<br/><br/>
+			<#if guestList??>
+			<table>
+			<#list guestList as guestList>
+			<tr><td>${guestList}
+			</#list>
+			</table>
+			<#else>Im a taco</#if>
 		</div>
 
 		<div id="toBringList">
@@ -78,8 +84,14 @@
 					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>
 			</div>	
-			<br/>Things to Bring:<br/><br/>
-			<#if bringList??>${bringList}<#else>Bring List here</#if>
+			Things to Bring:<br/><br/>
+			<#if bringSeq??>
+			<table>
+			<#list bringSeq as bringSeq>
+			<tr><td>${bringSeq}
+			</#list>
+			</table>
+			<#else>NOthing in bringlist</#if>
 		</div>
 
 		<div id="musicPlaylist">
@@ -92,8 +104,13 @@
 					<input type="hidden" name="${partyID?html}" id="partyID">
 				</form>
 			</div>	
-			<br/>Music Recommendations:<br/><br/>
-			<#if musicList??>${musicList}<#else>Music List here</#if>
+			Music Recommendations:<br/><br/>
+			<#if musicList??><table border=1>
+			<#list musicSeq as musicSeq>
+			<table>
+			<tr><td>${musicSeq}
+			</#list>No Music List<#else></#if>
+			</table>
 		</div>
 		<span class="stretch"></span>
 	</div>
