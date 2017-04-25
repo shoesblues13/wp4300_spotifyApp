@@ -2,6 +2,7 @@ package persistlayer;
 import objectlayer.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import boundary.PasswordHash;
 import freemarker.template.DefaultObjectWrapperBuilder;
@@ -57,10 +58,19 @@ public class ApolloPersistImpl {
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
-	public SimpleSequence getParty(int party_id, DefaultObjectWrapperBuilder db){
+	public Party getParty(int party_id){
 		
 		String sql = "SELECT * FROM party where party_id =\"" + party_id +"\";";;
+		return DbAccessImpl.getParty(sql);
+	}
+	
+	public SimpleSequence getGuestList(int party_id, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT guestname FROM guestlist where party_id=\"" + party_id + "\";";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
+	public List<Party> getTrending(){
+		String sql = "SELECT * from party;";
+		return DbAccessImpl.getTrending(sql);
+	}
 }

@@ -1,6 +1,9 @@
 package logiclayer;
 
 import persistlayer.ApolloPersistImpl;
+
+import java.util.List;
+
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleSequence;
 import objectlayer.*;
@@ -39,8 +42,16 @@ public class ApolloLogicImpl {
 		return apolloPersist.getParties(uname, db);
 	}
 	
-	public SimpleSequence getParty(int party_id, DefaultObjectWrapperBuilder db){
-		return apolloPersist.getParty(party_id,db);
+	public Party getParty(int party_id){
+		return apolloPersist.getParty(party_id);
+	}
+	
+	public SimpleSequence getGuestList(int party_id, DefaultObjectWrapperBuilder db){
+		return apolloPersist.getGuestList(party_id, db);
+	}
+	
+	public List<Party> getTrending(){
+		return apolloPersist.getTrending();
 	}
 	
 	

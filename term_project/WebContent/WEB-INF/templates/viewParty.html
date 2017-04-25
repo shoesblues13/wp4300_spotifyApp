@@ -31,14 +31,20 @@
 
 		<div id="guestList">
 			<div id="homeButtons">
-				<form action="ApolloServlet" method="get" id="guestListEdit">
+				<form action="ApolloServlet" method="post" id="">
 					<label for="addGuest">Enter a Username:</label>
 					<input type="text" id="guestListEdit" name="newGuest" required/>
 					<input type="submit" name="button" value="Entery Guest" />
+					<input type="hidden" name="page" value="viewParty"/>
 				</form>
 			</div>
 			Guests:<br/><br/>
-			<#if guestList??>${guestList}<#else></#if>
+			<#if guestList??>
+			<table border=1>
+			<#list guestList as guestList>
+			<tr><td>${guestList}
+			</#list>
+			<#else></#if>
 		</div>
 
 		<div id="toBringList">

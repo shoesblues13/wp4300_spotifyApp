@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleSequence;
@@ -148,10 +150,12 @@ public class DbAccessImpl {
 		ResultSet rs = retrieve(sql, c);
 		SimpleSequence sq = new SimpleSequence(db.build());
 		try {
+			
 				while(rs.next()){
 					String temp = rs.getString(1);
 					sq.add(temp);
 				}
+			
 			}catch (SQLException e){
 				e.printStackTrace();
 			}
@@ -161,7 +165,50 @@ public class DbAccessImpl {
 		
 	}
 	
+	public static Party getParty(String sql){
+		Connection c = connect();
+		ResultSet rs = retrieve(sql,c);
+		Party p = new Party();
+		try {
+			if (rs.next()){
+				p.setName(rs.getString("name"));
+				p.setStime(rs.getString("stime"));
+				p.setEtime(rs.getString("etime"));
+				p.setDescription(rs.getString("description"));
+				p.setLocation(rs.getString("location"));
+				p.setHost(rs.getInt("user_id"));
+				if (rs.getInt("public")==1)
+					p.setPub(true);
+				else 
+					p.setPub(false);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return p;
+	}
 	
-	
+	public static List<Party> getTrending(String sql){
+		Connection c = connect();
+		ResultSet rs = retrieve(sql,c);
+		List<Party> partys = new ArrayList<Party>();
+		int counter = 0;
+		try {
+			while(rs.next() && counter < 4) {
+				Party p = new Party();
+				p.setName(rs.getString("name"));
+				p.setScore(rs.getInt("score"));
+				p.setStime(rs.getString("stime"));
+				
+				partys.add(p);
+				++counter;
+			} // end of while
+			rs.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return partys;
+	}
 }
 

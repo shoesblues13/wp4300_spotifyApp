@@ -1,12 +1,16 @@
 package boundary;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
+import java.io.PrintWriter;
+
+import java.util.List;
+
+import java.lang.reflect.Type;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +23,9 @@ import freemarker.template.SimpleHash;
 import freemarker.template.SimpleSequence;
 import freemarker.template.TemplateModelException;
 import logiclayer.ApolloLogicImpl;
+import objectlayer.Party;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Servlet implementation class ApolloServlet
@@ -60,6 +67,7 @@ public class ApolloServlet extends HttpServlet {
 				String logout = request.getParameter("logout");
 				String signIn = request.getParameter("signIn");
 				String signUp = request.getParameter("signUp");
+				String trending = request.getParameter("trending");
 				ApolloLogicImpl logicImpl = new ApolloLogicImpl();
 				HttpSession session = request.getSession(false);
 				String servletName = "apollo";
@@ -68,8 +76,11 @@ public class ApolloServlet extends HttpServlet {
 				root.put("name", page);
 				if(logout !=null){
 					session.invalidate();
-					request.getRequestDispatcher("index.html").include(request, response);
+					processor.processTemplate("../../index.html", root, request, response);
 					
+				}
+				else if (trending != null){
+					getFiveTrending(response);
 				}
 				else if (page.equals("index")){
 					if (signIn != null)
@@ -115,7 +126,6 @@ public class ApolloServlet extends HttpServlet {
 						session.setAttribute("name", name);
 						session.setAttribute("user", check);
 						session.setAttribute("template", "userHome.html");
-						root.put("test",session.getAttribute("user"));
 						}
 						
 						SimpleSequence partiesSeq = logicImpl.getParties(check, db);
@@ -179,22 +189,25 @@ public class ApolloServlet extends HttpServlet {
 							synchronized(session){
 								session.setAttribute("party_id", party_id);
 							}
-							SimpleSequence sq = logicImpl.getParty(party_id, db);
-							root.put("partyName", party_id);
-							root.put("partyDesc", sq);
-							/*root.put("partyName", sq.get(2));
-							root.put("partyDesc", sq.get(5));
-							root.put("address", sq.get(6));
-							root.put("timeStart", sq.get(3));
-							root.put("timeEnd", sq.get(4));*/
+							SimpleSequence sb = logicImpl.getGuestList(party_id, db);
+							root.put("guestList", sb);
+							Party p = logicImpl.getParty(party_id);
+							root.put("partyName", p.getName());
+							root.put("partyDesc", p.getDescription());
+							root.put("address", p.getLocation());
+							root.put("timeStart", p.getStime());
+							root.put("timeEnd", p.getEtime());
 							
-							templateName="test.ftl";
+							templateName="viewParty.html";
 						}
 						else {
 							templateName="test.ftl";
 							root.put("check", desc);
 							
 						}
+					}
+					else if (page.equals("viewParty")){
+						
 					}
 					else if (page.equals("validate")){
 						String name= request.getParameter("name");
@@ -217,6 +230,24 @@ public class ApolloServlet extends HttpServlet {
 				}
 				processor.processTemplate(templateName, root, request, response);
 			}	
+	
+			private void getFiveTrending(HttpServletResponse response){
+				ApolloLogicImpl logicImpl = new ApolloLogicImpl();
+				List<Party> partys = logicImpl.getTrending();
+				response.setContentType("application/json");
+				Gson gson = new Gson();
+				Type type = new TypeToken<List<Party>>(){}.getType();
+				String json = gson.toJson(partys,type);
+				try {
+					PrintWriter out = response.getWriter();
+					out.println(json);
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+				
+			}
 	}
+
+	
 
 
