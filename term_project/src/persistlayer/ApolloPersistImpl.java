@@ -93,4 +93,9 @@ public class ApolloPersistImpl {
 		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+musicListInput+"', "+party_id+");";
 		return DbAccessImpl.create(sql);
 	}
+	
+	public int addGuest(String newGuest, int party_id){
+		String sql = "INSERT INTO guestList (guestname, party_id, user_id) VALUES('"+newGuest+"', "+party_id+", (SELECT user_id FROM users WHERE username = '"+newGuest+"');";
+		return DbAccessImpl.create(sql);
+	}
 }
