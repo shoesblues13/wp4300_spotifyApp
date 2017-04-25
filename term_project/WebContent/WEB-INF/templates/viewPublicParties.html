@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Public Parties</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Public Parties Happening Now</span>
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div id="partyForm">
+		<div id="innerDiv" class="homeDivs">
+			<h1>List of Top Public Parties Happening Right Now!</h1>
+			<br/><br/>
+			<#if publicParties??>${publicParties}<#else>Public party list Here</#if>
+		</div>
+	</div>
+</body>
+</html>

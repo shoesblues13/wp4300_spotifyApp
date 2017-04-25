@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Join <#if partyName??>${partyName}<#else>Party name Here</#if></title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Join <#if partyName??>${partyName}<#else>Party Name</#if></span>
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div id="accountForm">
+		<div id="innerDiv" class="homeDivs">
+			To join <#if partyName??>${partyName}<#else>(Party name Here)</#if>, please enter your name.
+			<br/><br/>
+			<form action="ApolloServlet" method="post" id="joinPartyForm">
+				<label for="fname">First Name: </label>
+				<input type="text" id="accountForm" name="fname" required/><br/><br/>
+				<label for="lname">Last Name: </label>
+				<input type="text" id="accountForm" name="lname" required/><br/><br/>
+				<input type="submit" name="button" value="Join this party" />
+                <input type="hidden" name="page" value="create"/>
+			</form>	
+			<form method="get" action="index.html">
+				<input type="submit" name="button" value="Cancel" form="signUpForm" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

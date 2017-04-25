@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="finalProject.js"></script>
+	<title>Apollo Dashboard</title>
+	
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo Dashboard</span>
+		<div id="sign">
+			<div class="headerButtons" id="homeButton">
+				<form method="get">
+					<input type="submit" name="button" value="Home" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>	
+			</div>
+			<div class="headerButtons" id="signOutButton">
+				<form method="get" id="header">
+					<input type="submit" name="logout" value="Sign Out" form="header" />
+					<input type="hidden" name="${userID?html}" id="userID">
+				</form>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div id="dashboard" class="homeDivs">
+		<div id="userDash">
+			<h1>Welcome ${name}!</h1>
+			<div id="homeButtons">
+				<form action="ApolloServlet" method="post" id="homePageForm">
+					<input type="submit" name="button1" value="View Invites" />
+					<input type="submit" name="button2" value="Host a New Party" />
+					<input type="submit" name="button3" value="Find a Party" />
+					<input type="hidden" name="page" value="userHome"/>
+					<input type="hidden" name="user" value="${user?html}"/>
+					
+				</form>	
+			</div>
+		</div>
+
+		<div id="hostingParties">
+			Parties Hosted
+			
+			<div id="allTables">
+				<table>
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+					<tr><td>party
+				</table>	
+			</div>
+		</div>
+
+		<div id="attendingParties">
+			Parties Attending
+		</div>
+		<span class="stretch"></span>
+	</div>
+</body>
+</html>
