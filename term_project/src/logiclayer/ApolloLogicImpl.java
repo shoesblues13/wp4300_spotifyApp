@@ -83,5 +83,9 @@ public class ApolloLogicImpl {
 		return apolloPersist.addGuestList(guestListInput, party_id);
 	}
 	
+	public Party getParty(String name,int user_id){
+		return apolloPersist.getParty(name, user_id);
+	}
+	
 	
 }

@@ -175,11 +175,12 @@ public class ApolloServlet extends HttpServlet {
 						}
 					}
 					else if(page.equals("userHome") && session != null){
-							session = request.getSession();
+							session = request.getSession(false);
 							if (session !=null){
 								String button1 = request.getParameter("button1");
 								String button2 = request.getParameter("button2");
 								String button3 = request.getParameter("button3");
+								String button4 = request.getParameter("button4");
 							if (button1 != null){
 								root.put("check", "it works");
 								templateName="test.ftl";
@@ -188,6 +189,32 @@ public class ApolloServlet extends HttpServlet {
 								templateName="newParty.html";
 							}
 							else if (button3 != null){
+								templateName="viewParty.html";
+							}
+							else if (button4!=null){
+								String party = request.getParameter("party");
+								int user_id;
+								synchronized(session){
+									user_id = (int) session.getAttribute("user");
+								}
+								Party p = logicImpl.getParty(party, user_id);
+								int party_id= p.getPartyId();
+								synchronized(session){
+									 session.setAttribute("party_id",party_id);
+								}
+								SimpleSequence sb = logicImpl.getGuestList(party_id, db);
+								SimpleSequence musicSeq = logicImpl.getMusicList(party_id, db);
+								SimpleSequence bringSeq = logicImpl.getBringList(party_id, db);
+								
+								
+								root.put("guestList", sb);
+								root.put("musicSeq", musicSeq);
+								root.put("bringSeq", bringSeq);
+								root.put("partyName", p.getName());
+								root.put("partyDesc", p.getDescription());
+								root.put("address", p.getLocation());
+								root.put("timeStart", p.getStime());
+								root.put("timeEnd", p.getEtime());
 								templateName="viewParty.html";
 							}
 						}
