@@ -39,7 +39,7 @@ public class ApolloLogicImpl {
 	}
 	
 	public SimpleSequence getUserInvited(int uname, DefaultObjectWrapperBuilder db){
-		return apolloPersist.getParties(uname, db);
+		return apolloPersist.getUserInvited(uname, db);
 	}
 	
 	public Party getParty(int party_id){
@@ -61,7 +61,6 @@ public class ApolloLogicImpl {
 	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getBringList(party_id, db);
 	}
-	
 	public int addBringList(String bringListInput, int party_id){
 		return apolloPersist.addBringList(bringListInput, party_id);
 	}
@@ -70,8 +69,5 @@ public class ApolloLogicImpl {
 		return apolloPersist.addMusicList(musicListInput, party_id);
 	}
 	
-	public int addGuest(String newGuest, int party_id){
-		
-	}
 	
 }

@@ -12,15 +12,13 @@
 		<span id="title"><#if partyName??>${partyName}<#else>Party Name</#if></span>
 		<div id="sign">
 			<div class="headerButtons" id="homeButton">
-				<form method="get">
-					<input type="submit" name="button" value="Home" form="header" />
-					<input type="hidden" name="${userID?html}" id="userID">
+				<form method="post">
+					<input type="submit" name="home" value="Home" form="header" />
 				</form>	
 			</div>
 			<div class="headerButtons" id="signOutButton">
-				<form method="get" id="header">
+				<form method="post" id="header">
 					<input type="submit" name="logout" value="Sign Out" form="header" />
-					<input type="hidden" name="${userID?html}" id="userID">
 				</form>
 			</div>
 		</div>
@@ -41,7 +39,7 @@
 
 	    	<br/><br/>
 
-	    	<h1><#if partyScore gt 0>+</#if> <#if partyScore??>${partyScore}<#else>(Party Score here)</#if></h1>
+
 
 			<br/><br/>
 
@@ -58,10 +56,9 @@
 			<div id="homeButtons">
 				<form action="ApolloServlet" method="post" id="guestListEdit">
 					<label for="addGuest">Enter a username:</label>
-					<input type="text" id="guestListEdit" name="newGuest" required/>
-					<input type="submit" name="guestEntry" value="Add Guest" />
-					<input type="hidden" name="${user?html}" id="user">
-					<input type="hidden" name="${partyID?html}" id="partyID">
+					<input type="text" id="guestListEdit" name="addGuest" required/>
+					<input type="submit" name="button" value="Add Guest" />
+					<input type="hidden" name="page" value="viewParty"/>
 				</form>
 			</div>
 			Guests:<br/><br/>
@@ -80,8 +77,7 @@
 					<label for="newItem">Enter a new item:</label>
 					<input type="text" id="bringListEdit" name="newItem" required/>
 					<input type="submit" name="addItem" value="Add Item" />
-					<input type="hidden" name="${user?html}" id="user">
-					<input type="hidden" name="${partyID?html}" id="partyID">
+					<input type="hidden" name="page" value="viewParty"/>
 				</form>
 			</div>	
 			Things to Bring:<br/><br/>
@@ -100,16 +96,15 @@
 					<label for="newSong">Enter a new song:</label>
 					<input type="text" id="musicEdit" name="newSong" required/>
 					<input type="submit" name="addSong" value="Add Song" />
-					<input type="hidden" name="${user?html}" id="user">
-					<input type="hidden" name="${partyID?html}" id="partyID">
+					<input type="hidden" name="page" value="viewParty"/>
 				</form>
 			</div>	
 			Music Recommendations:<br/><br/>
-			<#if musicList??><table border=1>
+			<#if musicSeq??><table border>
 			<#list musicSeq as musicSeq>
 			<table>
 			<tr><td>${musicSeq}
-			</#list>No Music List<#else></#if>
+			</#list><#else></#if>
 			</table>
 		</div>
 		<span class="stretch"></span>

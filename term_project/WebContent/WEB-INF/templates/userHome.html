@@ -10,17 +10,9 @@
 <body>
 	<div id="topBar" class="homeDivs">
 		<span id="title">Apollo Dashboard</span>
-		<div id="sign">
-			<div class="headerButtons" id="homeButton">
-				<form method="get">
-					<input type="submit" name="button" value="Home" form="header" />
-				</form>	
-			</div>
-			<div class="headerButtons" id="signOutButton">
-				<form method="get" id="header">
-					<input type="submit" name="logout" value="Sign Out" form="header" />
-				</form>
-			</div>
+		
+		<div id="signin">
+			<input type="submit" name="logout" value="Sign Out" form="homePageForm" />	
 		</div>
 	</div>
 	<br/>
@@ -33,27 +25,32 @@
 					<input type="submit" name="button1" value="View Invites" />
 					<input type="submit" name="button2" value="Host a New Party" />
 					<input type="submit" name="button3" value="Find a Party" />
-					<input type="hidden" name="page" value="userHome"/>					
+					<input type="hidden" name="page" value="userHome"/>
+					<input type="hidden" name="user" value="${user?html}"/>
+					
 				</form>	
 			</div>
 		</div>
 
 		<div id="hostingParties">
 			Parties Hosted
-			
-			<div id="allTables">
-				<table>
-					<tr><td>party
-					<tr><td>party
-					<tr><td>party
-					<tr><td>party
-					<tr><td>party
-				</table>	
-			</div>
+			<table>
+			<#list partiesSeq as partySeq>
+			<tr><td>${partySeq}
+			</#list>
+			</table>
 		</div>
 
 		<div id="attendingParties">
 			Parties Attending
+			<#if userSeq??>
+			<table>
+			<#list userSeq as userSeq>
+			<tr><td>${userSeq}
+			</#list>
+			</table>
+			<#else></#if>
+			
 		</div>
 		<span class="stretch"></span>
 	</div>

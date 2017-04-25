@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="scripts/test.js"></script>
+	
+	<title>Apollo Home</title>
+</head>
+<body>
+	<div id="topBar" class="homeDivs">
+		<span id="title">Apollo - The Party App</span>
+		
+		<div id="signin">
+			<form method="post" action="ApolloServlet">
+			<input type="submit" name="signIn" value="Sign In"/>
+			<input type="hidden" name="page" value="index"/>
+			</form>
+		</div>
+		
+	</div>
+	<br/>
+	<div id="homeMain">
+		<div id="searchDiv" class="homeDivs">
+			<form action="ApolloServlet" method="post" id="homePageForm">
+				Find a party:&emsp;<input type="text" id="search" name="search" placeholder="Enter Party Code"/>
+				<input type="submit" name="signUp" value="Search" />
+                <input type="hidden" name="page" value="index"/>
+			</form>	
+		</div>
+		<br/>
+		<br/>
+		<div id="intro" class="homeDivs">
+			<img src="./images/music.png" id="musicNote" alt="music note image">
+			<div id="introText"><p>With Apollo, organize the party of your life! Invite other users, know exactly when and where the party is
+			and what to bring, recommend music, and find popular parties you can crash!  </p>
+			<ol type="1">
+				<li>Sign in and host a party.</li>
+				<li>Invite other users, or send someone a unique party code so they can access the party page</li>
+				<li>Attendees can view party details, recommend songs or things to bring, and see other guests.</li>
+				<li>When it's party time, upvote or downvote the party. Highly rated public parties appear on our homepage!</li>
+			</ol>
+			<p id="center">Create an account and start now!</p>
+                <form method="get" action="createAccount.html" >
+			     <input type="submit" name="button" value="Sign Up"/>
+                </form>
+            </div>
+		</div>
+	</div>
+	<div id="homeTrending">
+		<div class="homeDivs" id="trending">
+			<p>Trending Parties </p>
+		</div>
+	</div>
+</body>
+</html>
