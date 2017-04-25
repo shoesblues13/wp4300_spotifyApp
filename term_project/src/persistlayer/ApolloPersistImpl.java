@@ -80,7 +80,17 @@ public class ApolloPersistImpl {
 	}
 	
 	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT songlist FROM music WHERE party_id = '"+party_id+"';";
+		String sql = "SELECT songlist FROM songlist WHERE party_id = '"+party_id+"';";
 		return DbAccessImpl.getSequence(sql, db);
+	}
+	
+	public int addBringList(String bringListInput, int party_id){
+		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+bringListInput+"', "+party_id+");";
+		return DbAccessImpl.create(sql);
+	}
+	
+	public int addMusicList(String musicListInput, int party_id){
+		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+musicListInput+"', "+party_id+");";
+		return DbAccessImpl.create(sql);
 	}
 }
