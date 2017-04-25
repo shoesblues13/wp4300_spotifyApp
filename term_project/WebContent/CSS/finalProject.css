@@ -15,6 +15,10 @@ body {
 	background-size: 100%;
 }
 
+h1 {
+	text-align: center;
+}
+
 #topBar {
 	font-size: 2em;
 	height: 50px;
@@ -23,13 +27,22 @@ body {
 	line-height: 50px;
 }
 
-#signin {
+#signin, #sign {
 	float: right;
-	width: 100px;
+	
 	height: 50px;
 	margin-right: 10px;
 	vertical-align: middle;
 	margin-top: -5px;
+	display: inline-block;
+}
+
+#sign {
+	width: 210px;
+}
+
+#signin{
+	width: 100px;
 }
 
 #title {
@@ -143,6 +156,18 @@ textarea {
 	box-sizing: border-box;
 }
 
+.headerButtons {
+	width: 100px;
+}
+
+#homeButton {
+	float: left;
+}
+
+#signOutButton {
+	float: right;
+}
+
 #accountForm {
 	width: 200px;
 	margin: auto;
@@ -155,11 +180,34 @@ textarea {
 
 #dashboard {
 	width: 98%;
-	height: 400px;
+	height: 530px;
 	padding: 10px;
 	text-align: justify;
 }
 
+.vote {
+  display: inline-block;
+  overflow: hidden;
+  width: 40px;
+  height: 25px;
+  cursor: pointer;
+  background: url("../images/upvote.png");
+  background-position: 0 -25px;
+} 
+
+
+.vote.on {
+  background-position: 0 2px;
+}
+
+table tr td {
+	border: 1px solid white;
+	width: 80%;
+}
+
+table {
+	border-collapse: collapse;
+}
 #homeButtons {
 	width: 50%;
 }
@@ -177,7 +225,8 @@ textarea {
 }
 
 #partyInfo, #toBringList, #musicPlaylist, #guestList  {
-	width: 20%;
+	width: 21%;
+
 }
 
 .stretch {
@@ -197,3 +246,4 @@ textarea {
 #partyRight {
 	float: right;
 }
+

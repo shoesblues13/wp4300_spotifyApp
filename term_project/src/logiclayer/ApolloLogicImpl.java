@@ -34,12 +34,12 @@ public class ApolloLogicImpl {
 		return apolloPersist.addParty(p);
 	}
 	
-	public SimpleSequence getPartyNames(int uname, DefaultObjectWrapperBuilder db){
+	public SimpleSequence getParties(int uname, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getParties(uname, db);
 	}
 	
 	public SimpleSequence getUserInvited(int uname, DefaultObjectWrapperBuilder db){
-		return apolloPersist.getParties(uname, db);
+		return apolloPersist.getUserInvited(uname, db);
 	}
 	
 	public Party getParty(int party_id){
@@ -57,11 +57,13 @@ public class ApolloLogicImpl {
 	public SimpleSequence getMusicList(int party_id, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getMusicList(party_id, db);
 	}
-	
 	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getBringList(party_id, db);
 	}
 	
+	public List<BringList> getBringList(int party_id){
+		return apolloPersist.getBringList(party_id);
+	}
 	public int addBringList(String bringListInput, int party_id){
 		return apolloPersist.addBringList(bringListInput, party_id);
 	}
@@ -73,5 +75,13 @@ public class ApolloLogicImpl {
 	public SimpleSequence getPartyIds(int uname, DefaultObjectWrapperBuilder db){
 		return apolloPersist.getPartyIds(uname, db);
 	}
+	
+	public List<BringList> getGuestList(int party_id){
+		return apolloPersist.getBringList(party_id);
+	}
+	public int addGuestList(String guestListInput, int party_id){
+		return apolloPersist.addGuestList(guestListInput, party_id);
+	}
+	
 	
 }

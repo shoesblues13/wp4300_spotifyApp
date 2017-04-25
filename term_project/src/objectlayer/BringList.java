@@ -5,6 +5,10 @@ public class BringList {
 	private String bringlist;
 	private int party_id;
 
+	public BringList(){
+		
+	}
+	
 	public BringList(String bringList, int party_id){
 		this.bringlist = bringList;
 		this.party_id = party_id;

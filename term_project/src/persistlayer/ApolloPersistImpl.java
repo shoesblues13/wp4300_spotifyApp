@@ -35,7 +35,12 @@ public class ApolloPersistImpl {
 		return r;
 		
 	}
-	
+	public int getUserId(String uname) {
+		String sql = "SELECT user_id FROM users WHERE username=\"" + uname + "\";";
+		int r = DbAccessImpl.getInt(sql, "user_id");
+		return r;
+		
+	}
 	public int addParty(Party p) {
 		int pub = 0;
 		if(p.getPub()){
@@ -50,11 +55,11 @@ public class ApolloPersistImpl {
 	
 	public SimpleSequence getParties(int uname, DefaultObjectWrapperBuilder db){
 		String sql = "SELECT name FROM party WHERE user_id =\""+uname+"\";";
-		return DbAccessImpl.getSequence(sql, db);
+		return DbAccessImpl.getParties(sql, db);
 	}
 	
 	public SimpleSequence getUserInvited(int uname, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT name FROM party WHERE user_id =\""+uname+"\";";
+		String sql = "SELECT party.name FROM party INNER JOIN guestlist ON party.party_id = guestlist.party_id AND guestlist.user_id =\"" + uname + "\";";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
@@ -75,32 +80,40 @@ public class ApolloPersistImpl {
 	}
 	
 	public SimpleSequence getMusicList(int party_id, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT bringlist FROM bringlist WHERE party_id ='"+party_id+"';";
+		String sql = "SELECT songList FROM music WHERE party_id ='"+party_id+"';";
+		return DbAccessImpl.getSequence(sql, db);
+	}
+	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
+		String sql = "SELECT bringlist FROM bringlist WHERE party_id = '"+party_id+"';";
 		return DbAccessImpl.getSequence(sql, db);
 	}
 	
-	public SimpleSequence getBringList(int party_id, DefaultObjectWrapperBuilder db){
-		String sql = "SELECT songlist FROM songlist WHERE party_id = '"+party_id+"';";
-		return DbAccessImpl.getSequence(sql, db);
+	public List<BringList> getBringList(int party_id){
+		String sql = "SELECT bringlist FROM bringlist WHERE party_id = '"+party_id+"';";
+		return DbAccessImpl.getBringList(sql);
 	}
 	
 	public int addBringList(String bringListInput, int party_id){
-		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+bringListInput+"', "+party_id+");";
+		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+bringListInput+"',' "+party_id+"');";
 		return DbAccessImpl.create(sql);
 	}
 	
 	public int addMusicList(String musicListInput, int party_id){
-		String sql = "INSERT INTO bringList (bringlist, party_id) VALUES('"+musicListInput+"', "+party_id+");";
+		String sql = "INSERT INTO music (songList, party_id) VALUES('"+musicListInput+"',' "+party_id+"');";
 		return DbAccessImpl.create(sql);
 	}
-	
-	public int addGuest(String newGuest, int party_id){
-		String sql = "INSERT INTO guestList (guestname, party_id, user_id) VALUES('"+newGuest+"', "+party_id+", (SELECT user_id FROM users WHERE username = '"+newGuest+"');";
-		return DbAccessImpl.create(sql);
-	}
-	
 	public SimpleSequence getPartyIds(int uname, DefaultObjectWrapperBuilder db){
 		String sql = "SELECT party_id FROM party WHERE user_id =\""+uname+"\";";
 		return DbAccessImpl.getSequence(sql, db);
 	}
+	public int addGuestList(String guestListInput, int party_id){
+		String name = getName(guestListInput);
+		int id = getUserId(guestListInput);
+		if(id >0 && name !=null){
+			String sql = "INSERT INTO guestlist (guestname, party_id, user_id) VALUES('"+name+"', '"+party_id+"', '"+ id+"');";
+			return DbAccessImpl.create(sql);
+		}
+		return -1;
+	}
+	
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleSequence;
+import objectlayer.BringList;
 import objectlayer.Party;
 import persistlayer.DbAccessConfiguration;
 
@@ -210,6 +211,48 @@ public class DbAccessImpl {
 		}
 		disconnect(c);
 		return partys;
+	}
+	
+	public static SimpleSequence getParties(String sql, DefaultObjectWrapperBuilder db){
+		Connection c = connect();
+		ResultSet rs = retrieve(sql, c);
+		SimpleSequence sq = new SimpleSequence(db.build());
+		int counter = 0;
+		try {
+				
+				while(rs.next() && counter < 15){
+					String temp = rs.getString(1);
+					sq.add(temp);
+					++counter;
+				}
+			
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		
+		disconnect(c);
+		return sq;
+		
+	}
+	public static List<BringList> getBringList(String sql){
+		Connection c = connect();
+		ResultSet rs = retrieve(sql,c);
+		List<BringList> bl = new ArrayList<BringList>();
+		int counter = 0;
+		try {
+			while(rs.next()) {
+				BringList b = new BringList();
+				b.setBringlist(rs.getString("bringlist"));
+				bl.add(b);
+				++counter;
+			} // end of while
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		disconnect(c);
+		return bl;
 	}
 }
 
