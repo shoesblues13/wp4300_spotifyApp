@@ -190,7 +190,14 @@ public class ApolloServlet extends HttpServlet {
 								session.setAttribute("party_id", party_id);
 							}
 							SimpleSequence sb = logicImpl.getGuestList(party_id, db);
+							
+							SimpleSequence musicSeq = logicImpl.getMusicList(party_id, db);
+							SimpleSequence bringSeq = logicImpl.getBringList(party_id, db);
+							
+							
 							root.put("guestList", sb);
+							root.put("musicSeq", musicSeq);
+							root.put("bringSeq", bringSeq);
 							Party p = logicImpl.getParty(party_id);
 							root.put("partyName", p.getName());
 							root.put("partyDesc", p.getDescription());
