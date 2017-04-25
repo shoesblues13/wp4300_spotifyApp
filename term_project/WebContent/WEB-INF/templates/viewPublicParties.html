@@ -12,7 +12,7 @@
 		<div id="sign">
 			<div class="headerButtons" id="homeButton">
 				<form method="get">
-					<input type="submit" name="button" value="Home" form="header" />
+					<input type="submit" name="home" value="Home" form="header" />
 				</form>	
 			</div>
 			<div class="headerButtons" id="signOutButton">
@@ -28,7 +28,17 @@
 		<div id="innerDiv" class="homeDivs">
 			<h1>List of Top Public Parties Happening Right Now!</h1>
 			<br/><br/>
-			<#if publicParties??>${publicParties}<#else>Public party list Here</#if>
+			<#if publicParties??>
+			<form method="post" action="ApolloServlet">
+			<table>
+			<#list publicParties as publicParties>
+			<tr><td><input type="radio" name="party" value="${publicParties?html}"/>${publicParties}
+			</#list>
+			</table>
+			<input type="submit" name="button" value="view"/>
+			<input type="hidden" name="page" value="viewPublicParties"/>
+			</form>
+			<#else></#if>
 		</div>
 	</div>
 </body>

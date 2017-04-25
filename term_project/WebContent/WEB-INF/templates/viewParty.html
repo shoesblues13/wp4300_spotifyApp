@@ -9,6 +9,7 @@
 	<title>View <#if partyName??>${partyName}<#else>Party Name</#if></title>
 </head>
 <body>
+	
 	<div id="topBar" class="homeDivs">
 		<span id="title"><#if partyName??>${partyName}<#else>Party Name</#if></span>
 		<div id="sign">
@@ -96,12 +97,12 @@
 			</div>	
 			Music Recommendations:<br/><br/>
 			<#if musicSeq??><table id="musicTable" >
-			<table>
 			<#list musicSeq as musicSeq>
 			<tr><td>${musicSeq}
 			</#list><#else></#if>
 			</table>
 		</div>
+		<input type="hidden" name="owner" value="${owner?html}"/>
 		<span class="stretch"></span>
 	</div>
 </body>

@@ -123,4 +123,9 @@ public class ApolloPersistImpl {
 		return p;
 	}
 	
+	public SimpleSequence getPublicPartys(DefaultObjectWrapperBuilder db){
+		String sql = "SELECT name FROM party where public=\"" + 1+"\";";
+		return DbAccessImpl.getSequence(sql, db);
+	}
+	
 }
