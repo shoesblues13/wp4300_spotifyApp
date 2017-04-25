@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link href="CSS/finalProject.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="finalProject.js"></script>
+	<link rel="shortcut icon" href="favicon.ico">
 	<title>Apollo Dashboard</title>
 	
 </head>
@@ -22,31 +23,33 @@
 			<h1>Welcome ${name}!</h1>
 			<div id="homeButtons">
 				<form action="ApolloServlet" method="post" id="homePageForm">
-					<input type="submit" name="button1" value="View Invites" />
 					<input type="submit" name="button2" value="Host a New Party" />
 					<input type="submit" name="button3" value="Find a Party" />
 					<input type="hidden" name="page" value="userHome"/>
-					
-					
 				</form>	
 			</div>
 		</div>
 
 		<div id="hostingParties">
-			Parties Hosted
-			<form method="post" action="ApolloServlet">
-			<table>
-			<#list partiesSeq as partySeq>
-			<tr><td><input type="radio" name="party" value="${partySeq?html}"/>${partySeq}
-			</#list>
-			</table>
-			<input type="submit" name="button4" value="view"/>
-			<input type="hidden" name="page" value="userHome"/>
-			</form>
+			<h1>Parties Hosted</h1>
+			<br/>
+			<div class="centerDiv">
+				<form method="post" action="ApolloServlet">
+				<table>
+				<#list partiesSeq as partySeq>
+				<tr><td><input type="radio" name="party" value="${partySeq?html}"/>${partySeq}
+				</#list>
+				</table>
+				<br/><br/>
+				<input type="submit" id="dashButton" name="button4" value="View This Party"/>
+				<input type="hidden" name="page" value="userHome"/>
+				</form>
+			</div>
 		</div>
 
 		<div id="attendingParties">
-			Parties Attending
+			<h1>Parties Attending</h1>
+			<br/>
 			<#if userSeq??>
 			<table>
 			<#list userSeq as userSeq>
